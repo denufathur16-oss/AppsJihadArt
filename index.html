@@ -1,61 +1,108 @@
+
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#03261d">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Program Jihad PJ">
-  <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="icon" href="./icon-192.png">
-  <title>Program Jihad PJ</title>
-  <style>
-    *{box-sizing:border-box}html,body{margin:0;width:100%;min-height:100%;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#03261d;color:#17231f}
-    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(135deg,#03261d,#07553f)}
-    .card{width:min(460px,100%);background:#fff;border-radius:24px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.28);text-align:center}
-    .logo{width:84px;height:84px;border-radius:20px;display:block;margin:0 auto 18px}.title{margin:0;font-size:22px}.sub{margin:8px 0 22px;color:#687670;font-size:13px;line-height:1.6}
-    .loading{height:6px;border-radius:99px;background:#e5ece9;overflow:hidden}.loading:after{content:"";display:block;width:38%;height:100%;background:#07553f;border-radius:99px;animation:load 1s infinite ease-in-out}@keyframes load{0%{transform:translateX(-110%)}100%{transform:translateX(290%)}}
-    .error{display:none;margin-top:16px;padding:12px 14px;background:#fff1f0;color:#b42318;border-radius:12px;font-size:12px;line-height:1.5;text-align:left}
-    .btn{display:none;margin-top:16px;width:100%;height:48px;border:0;border-radius:12px;background:#07553f;color:#fff;font-weight:800;cursor:pointer}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#063b2d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Program Jihad PJ">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon-192.png">
+<title>Program Jihad PJ</title>
+<style>
+:root{--green:#063b2d;--green2:#0b5b45;--cream:#f6f4ed;--card:#fff;--text:#17332b;--muted:#789087;--line:#e5ebe7;--danger:#b93838;--shadow:0 10px 30px rgba(6,59,45,.08)}
+*{box-sizing:border-box}html,body{margin:0;background:var(--cream);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+#loginView{min-height:100vh;display:grid;place-items:center;padding:24px;background:linear-gradient(145deg,#063b2d,#0b5b45)}.login-card{width:min(430px,100%);background:#fff;border-radius:30px;padding:30px 24px;box-shadow:0 25px 70px rgba(0,0,0,.25);text-align:center}.logo{width:92px;height:92px;object-fit:contain;border-radius:24px;margin:auto auto 18px;display:block}.login-card h1{margin:0;font-size:24px}.login-card p{color:var(--muted);font-size:13px;margin:8px 0 24px}.field{text-align:left;margin-bottom:14px}.field label{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;margin-bottom:7px;color:#567066}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:#f9fbfa;border-radius:14px;padding:13px 14px;outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:#6fa993;box-shadow:0 0 0 3px rgba(11,91,69,.08)}.primary{width:100%;border:0;border-radius:15px;padding:14px;background:var(--green);color:#fff;font-weight:900;margin-top:5px}.error{color:var(--danger);font-size:12px;margin-top:12px}
+#appView{min-height:100vh;padding-bottom:84px}.topbar{position:sticky;top:0;z-index:20;background:rgba(246,244,237,.94);backdrop-filter:blur(16px);padding:calc(10px + env(safe-area-inset-top)) 16px 10px;border-bottom:1px solid rgba(229,235,231,.8);display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px;font-weight:900}.brand img{width:40px;height:40px;border-radius:12px;object-fit:contain}.avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#dce8e2}.content{padding:18px 15px;max-width:700px;margin:auto}.greeting{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;border-radius:24px;padding:22px;box-shadow:var(--shadow);margin-bottom:15px}.greeting small{opacity:.75}.greeting h2{margin:5px 0 0;font-size:22px}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}.stat{background:#fff;border-radius:20px;padding:17px;box-shadow:var(--shadow)}.stat b{display:block;font-size:28px}.stat span{font-size:11px;color:var(--muted);font-weight:800}.section-title{display:flex;align-items:center;justify-content:space-between;margin:18px 2px 10px;font-size:15px;font-weight:900}.select{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 10px;font-size:12px}.program-card,.member-card,.report-card,.profile-card,.timeline-card{background:#fff;border-radius:20px;padding:17px;margin-bottom:11px;box-shadow:var(--shadow);border:1px solid rgba(229,235,231,.7)}.program-title{font-weight:900;font-size:16px;line-height:1.35}.meta{font-size:11px;color:var(--muted);margin-top:7px}.status{display:inline-flex;margin-top:12px;border-radius:999px;padding:6px 9px;font-size:10px;font-weight:900;background:#eef5f1}.status.done{background:#dff3e8;color:#167047}.status.pending{background:#fff1d8;color:#96651c}.card-actions{display:flex;gap:8px;margin-top:12px}.small-btn{border:0;border-radius:12px;padding:10px 12px;font-size:11px;font-weight:900;background:#edf4f1;color:var(--green)}.small-btn.primary2{background:var(--green);color:#fff}.small-btn.danger{background:#fff0f0;color:var(--danger)}.empty{text-align:center;color:var(--muted);padding:30px 10px;font-size:13px}.member-head{display:flex;gap:12px;align-items:center}.member-head img{width:52px;height:52px;border-radius:16px;object-fit:cover;background:#dce8e2}.member-name{font-weight:900}.member-meta{font-size:11px;color:var(--muted);margin-top:3px}.kv{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.kv div{background:#f7faf8;border-radius:12px;padding:10px}.kv span{display:block;font-size:9px;color:var(--muted);font-weight:800}.kv b{font-size:12px}.bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:8px 7px calc(8px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(5,1fr)}.navbtn{border:0;background:none;color:#8a9b94;font-size:9px;font-weight:900;padding:5px 2px}.navbtn span{display:block;font-size:20px;margin-bottom:2px}.navbtn.active{color:var(--green)}.page{display:none}.page.active{display:block}.toolbar{display:flex;gap:8px;align-items:center}.toolbar .select{flex:1}.modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.42);display:flex;align-items:flex-end}.sheet{background:#fff;width:100%;max-height:92vh;overflow:auto;border-radius:26px 26px 0 0;padding:20px 16px calc(25px + env(safe-area-inset-bottom))}.sheet h3{margin:0 0 15px}.sheet-actions{display:flex;gap:9px;margin-top:12px}.sheet-actions button{flex:1}.photo-box{text-align:center;margin-bottom:18px}.photo-preview{width:105px;height:105px;border-radius:50%;object-fit:cover;background:#dce8e2}.readonly{background:#eef2f0!important;color:#718079}.loading{position:fixed;inset:0;z-index:200;background:rgba(246,244,237,.72);display:grid;place-items:center}.spinner{width:38px;height:38px;border:4px solid #d9e5df;border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+@media(min-width:760px){.content{padding:25px}.bottomnav{left:50%;right:auto;width:700px;transform:translateX(-50%);border-radius:18px 18px 0 0}.stats{grid-template-columns:repeat(4,1fr)}}
+</style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="card">
-      <img class="logo" src="./icon-192.png" alt="Program Jihad PJ">
-      <h1 class="title">Program Jihad PJ</h1>
-      <p class="sub">Membuka aplikasi. Mohon tunggu...</p>
-      <div id="loading" class="loading"></div>
-      <div id="error" class="error"></div>
-      <button id="retry" class="btn">BUKA APLIKASI</button>
+<div id="loginView">
+  <div class="login-card">
+    <img class="logo" src="./icon-192.png">
+    <h1>Program Jihad PJ</h1><p>Silakan masuk untuk melanjutkan.</p>
+    <div class="field"><label>USERNAME</label><input id="loginUsername" autocomplete="username"></div>
+    <div class="field"><label>PASSWORD</label><input id="loginPassword" type="password" autocomplete="current-password"></div>
+    <button class="primary" onclick="doLogin()">MASUK</button><div id="loginError" class="error"></div>
+  </div>
+</div>
+
+<div id="appView" class="hidden">
+  <header class="topbar"><div class="brand"><img src="./icon-192.png"><span>Program Jihad PJ</span></div><img id="topAvatar" class="avatar" src="./icon-192.png"></header>
+  <main class="content">
+    <section id="homePage" class="page active">
+      <div class="greeting"><small>Assalamu'alaikum</small><h2 id="greetingName">-</h2><small id="greetingRole">-</small></div>
+      <div class="stats"><div class="stat"><b id="statTotal">0</b><span>TOTAL PROGRAM</span></div><div class="stat"><b id="statDone">0</b><span>SELESAI</span></div><div class="stat"><b id="statPending">0</b><span>BELUM SELESAI</span></div><div class="stat"><b id="statRate">0%</b><span>PROGRES</span></div></div>
+      <div class="section-title"><span>Program Bulan Ini</span><select id="monthSelect" class="select" onchange="loadPrograms()"></select></div>
+      <div id="programList"></div>
     </section>
+    <section id="timelinePage" class="page"><div class="section-title"><span>Time Schedule</span><button class="small-btn" onclick="loadTimeline()">↻ Refresh</button></div><div id="timelineList"></div></section>
+    <section id="reportPage" class="page"><div class="section-title"><span>Report</span><button class="small-btn" onclick="loadReports()">↻ Refresh</button></div><div id="reportList"></div></section>
+    <section id="anggotaPage" class="page"><div class="section-title"><span>Data Anggota</span><button id="addMemberBtn" class="small-btn primary2 hidden" onclick="openMemberModal()">＋ Tambah</button></div><div class="field"><input id="memberSearch" placeholder="Cari nama, jabatan, WhatsApp..." oninput="renderMembers()"></div><div id="memberList"></div></section>
+    <section id="profilePage" class="page"><div class="profile-card"><div class="photo-box"><img id="profilePhoto" class="photo-preview" src="./icon-192.png"><div style="margin-top:10px"><button class="small-btn primary2" onclick="pickProfilePhoto()">📷 Ganti Foto</button><input id="profilePhotoInput" type="file" accept="image/*" class="hidden" onchange="uploadProfilePhoto()"></div></div>
+      <div class="field"><label>USERNAME</label><input id="pUsername" class="readonly" readonly></div>
+      <div class="field"><label>ROLE</label><input id="pRole" class="readonly" readonly></div>
+      <div class="field"><label>STATUS</label><input id="pStatus" class="readonly" readonly></div>
+      <div class="field"><label>NPA</label><input id="pNpa" class="readonly" readonly></div>
+      <div class="field"><label>NAMA</label><input id="pNama"></div>
+      <div class="field"><label>EMAIL</label><input id="pEmail" type="email"></div>
+      <div class="field"><label>JABATAN</label><input id="pJabatan"></div>
+      <div class="field"><label>ALAMAT</label><textarea id="pAlamat" rows="2"></textarea></div>
+      <div class="field"><label>PENDIDIKAN</label><input id="pPendidikan"></div>
+      <div class="field"><label>WHATSAPP</label><input id="pWhatsapp"></div>
+      <div class="field"><label>PEKERJAAN</label><input id="pPekerjaan"></div>
+      <button class="primary" onclick="saveProfile()">SIMPAN PROFILE</button>
+      <button class="small-btn" style="width:100%;margin-top:9px" onclick="openPasswordModal()">🔑 Ganti Password</button>
+      <button class="small-btn danger" style="width:100%;margin-top:9px" onclick="doLogout()">↪ Keluar</button>
+      <div id="profileMessage" class="error"></div>
+    </div></section>
   </main>
+  <nav class="bottomnav"><button class="navbtn active" data-page="homePage" onclick="showPage('homePage',this)"><span>⌂</span>Beranda</button><button class="navbtn" data-page="timelinePage" onclick="showPage('timelinePage',this)"><span>◷</span>Timeline</button><button class="navbtn" data-page="reportPage" onclick="showPage('reportPage',this)"><span>▥</span>Report</button><button class="navbtn" data-page="anggotaPage" onclick="showPage('anggotaPage',this)"><span>♙</span>Anggota</button><button class="navbtn" data-page="profilePage" onclick="showPage('profilePage',this)"><span>●</span>Profile</button></nav>
+</div>
+
+<div id="modalRoot"></div><div id="loading" class="loading hidden"><div class="spinner"></div></div>
 <script>
-(async function(){
-  const error=document.getElementById('error');
-  const retry=document.getElementById('retry');
-  const loading=document.getElementById('loading');
-  let appUrl='';
-  try{
-    const res=await fetch('./config.json',{cache:'no-store'});
-    if(!res.ok) throw new Error('config.json tidak ditemukan.');
-    const config=await res.json();
-    appUrl=String(config.appUrl||'').trim();
-    if(!/^https:\/\/script\.google\.com\/macros\/s\/[^\s]+\/exec(?:\?.*)?$/.test(appUrl)) throw new Error('URL Web App pada config.json tidak valid.');
-    location.replace(appUrl);
-  }catch(e){
-    loading.style.display='none';
-    error.textContent=e.message||'Gagal membuka aplikasi.';
-    error.style.display='block';
-    retry.style.display='block';
-    retry.onclick=()=>location.reload();
-  }
-  if('serviceWorker' in navigator){
-    window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
-  }
-})();
+const API_URL='https://script.google.com/macros/s/AKfycbwnP9XnbT7LAE8kGKmKz5RwITBFm-owAcS-0PxGnYayPW2iciMRXYMbDEjmzAYb7mKo9A/exec';
+let session=JSON.parse(localStorage.getItem('pj_session')||'null');
+let members=[]; let requestSeq=0; const pending={};
+
+function api(action,payload={}){return new Promise((resolve,reject)=>{const id='r'+Date.now()+'_'+(++requestSeq);pending[id]={resolve,reject};const iframe=document.createElement('iframe');iframe.name='api_'+id;iframe.style.display='none';iframe.dataset.req=id;document.body.appendChild(iframe);const form=document.createElement('form');form.method='POST';form.action=API_URL;form.target=iframe.name;form.style.display='none';const add=(n,v)=>{const i=document.createElement('input');i.type='hidden';i.name=n;i.value=v;form.appendChild(i)};add('action',action);add('requestId',id);add('payload',JSON.stringify(payload));document.body.appendChild(form);form.submit();form.remove();setTimeout(()=>{iframe.remove();if(pending[id]){delete pending[id];reject(new Error('Waktu tunggu API habis.'))}},30000)})}
+window.addEventListener('message',e=>{if(!e.data||e.data.type!=='PROGRAM_JIHAD_API')return;const m=e.data.payload||{};const p=pending[m.requestId];if(!p)return;delete pending[m.requestId];const iframe=document.querySelector('iframe[data-req="'+m.requestId+'"]');if(iframe)iframe.remove();m.success?p.resolve(m.data):p.reject(new Error(m.error||'Terjadi kesalahan.'))});
+function setLoading(v){document.getElementById('loading').classList.toggle('hidden',!v)}
+function esc(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+function normalize(v){return String(v||'').toLowerCase().trim()}
+async function doLogin(){const u=document.getElementById('loginUsername').value.trim(),p=document.getElementById('loginPassword').value;document.getElementById('loginError').textContent='';if(!u||!p){document.getElementById('loginError').textContent='Username dan password wajib diisi.';return}setLoading(true);try{const r=await api('login',{username:u,password:p});if(!r.success)throw new Error(r.message||'Login gagal.');session=r;localStorage.setItem('pj_session',JSON.stringify(session));await unlock()}catch(e){document.getElementById('loginError').textContent=e.message;setLoading(false)}}
+async function unlock(){document.getElementById('loginView').classList.add('hidden');document.getElementById('appView').classList.remove('hidden');document.getElementById('greetingName').textContent=session.nama||session.username;document.getElementById('greetingRole').textContent=(session.role||'').toUpperCase()+(session.jabatan?' · '+session.jabatan:'');if(normalize(session.role)==='admin')document.getElementById('addMemberBtn').classList.remove('hidden');try{await loadProfile();await loadMonths();await loadPrograms();await loadReports();await loadMembers()}catch(e){if(/sesi|login/i.test(e.message))return forceLogout();alert(e.message)}finally{setLoading(false)}}
+async function boot(){if(!session){setLoading(false);return}setLoading(true);try{await api('profile',{sessionToken:session.sessionToken});await unlock()}catch(e){forceLogout()}finally{setLoading(false)}}
+function forceLogout(){session=null;localStorage.removeItem('pj_session');document.getElementById('appView').classList.add('hidden');document.getElementById('loginView').classList.remove('hidden')}
+async function doLogout(){try{await api('logout',{sessionToken:session.sessionToken})}catch(e){}forceLogout()}
+function showPage(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.navbtn').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');if(id==='timelinePage')loadTimeline();if(id==='anggotaPage')loadMembers();if(id==='reportPage')loadReports();if(id==='profilePage')loadProfile()}
+async function loadMonths(){const r=await api('bulan',{sessionToken:session.sessionToken});const s=document.getElementById('monthSelect');s.innerHTML=r.map(x=>`<option>${esc(x)}</option>`).join('');if(!s.value&&r.length)s.selectedIndex=0}
+async function loadPrograms(){const month=document.getElementById('monthSelect').value;const list=document.getElementById('programList');list.innerHTML='<div class="empty">Memuat...</div>';try{const data=await api('program',{bulan:month,username:session.username,sessionToken:session.sessionToken});const done=data.filter(x=>normalize(x.status)==='selesai').length;document.getElementById('statTotal').textContent=data.length;document.getElementById('statDone').textContent=done;document.getElementById('statPending').textContent=data.length-done;document.getElementById('statRate').textContent=(data.length?Math.round(done/data.length*100):0)+'%';list.innerHTML=data.length?data.map(programCard).join(''):'<div class="empty">Belum ada program.</div>'}catch(e){list.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}}
+function programCard(x){const done=normalize(x.status)==='selesai';const can=normalize(session.role)==='admin'||(normalize(session.role)==='pic'&&normalize(session.jabatan)===normalize(x.jabatan));return `<article class="program-card"><div class="program-title">${esc(x.program)}</div><div class="meta">${esc(x.tanggal||'-')} · ${esc(x.jabatan||'-')}</div><span class="status ${done?'done':'pending'}">${done?'✓ Selesai':'● Belum selesai'}</span>${x.catatan?`<div class="meta">Catatan: ${esc(x.catatan)}</div>`:''}${can&&!done?`<div class="card-actions"><button class="small-btn primary2" onclick="finishProgram(${x.row},'${esc(x.program)}','${esc(x.jabatan)}')">Tandai Selesai</button></div>`:''}</article>`}
+async function finishProgram(row,program,jabatan){const note=prompt('Catatan penyelesaian untuk '+program+':','');if(note===null)return;setLoading(true);try{await api('updateProgram',{bulan:document.getElementById('monthSelect').value,rowNumber:row,username:session.username,role:session.role,catatan:note,sessionToken:session.sessionToken});await loadPrograms()}catch(e){alert(e.message)}finally{setLoading(false)}}
+async function loadTimeline(){const list=document.getElementById('timelineList');list.innerHTML='<div class="empty">Memuat...</div>';const d=new Date();const start=new Date(d);start.setDate(d.getDate()-30);const end=new Date(d);end.setDate(d.getDate()+90);try{const data=await api('timeline',{startDate:iso(start),endDate:iso(end),username:session.username,sessionToken:session.sessionToken});list.innerHTML=data.length?data.map(x=>`<article class="timeline-card"><div class="program-title">${esc(x.program)}</div><div class="meta">${esc(x.tanggal||'-')} · ${esc(x.jabatan||'-')}</div><span class="status ${normalize(x.status)==='selesai'?'done':'pending'}">${esc(x.status)}</span></article>`).join(''):'<div class="empty">Tidak ada jadwal pada rentang ini.</div>'}catch(e){list.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}}
+function iso(d){return d.toISOString().slice(0,10)}
+async function loadReports(){const el=document.getElementById('reportList');el.innerHTML='<div class="empty">Memuat...</div>';try{const [a,b,c]=await Promise.all([api('reportPrograms',{sessionToken:session.sessionToken}),api('reportProgramKerja',{sessionToken:session.sessionToken}),api('reportPIC',{sessionToken:session.sessionToken})]);el.innerHTML='<div class="section-title">Rekap Bulanan</div>'+a.map(x=>`<article class="report-card"><b>${esc(x.bulan)}</b><div class="kv"><div><span>TOTAL</span><b>${x.total}</b></div><div><span>SELESAI</span><b>${x.selesai}</b></div><div><span>BELUM</span><b>${x.belum}</b></div><div><span>PROGRES</span><b>${x.persentase}%</b></div></div></article>`).join('')+'<div class="section-title">Program Kerja</div>'+b.slice(0,12).map(x=>`<article class="report-card"><b>${esc(x.program)}</b><div class="meta">${x.total} kegiatan · ${x.persentaseSelesai}% selesai</div></article>`).join('')+'<div class="section-title">Jabatan</div>'+c.map(x=>`<article class="report-card"><b>${esc(x.jabatan)}</b><div class="meta">${x.total} program · ${x.persentase}% selesai</div></article>`).join('')}catch(e){el.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}}
+async function loadMembers(){try{const r=await api('anggota',{sessionToken:session.sessionToken});members=r.rows||[];renderMembers()}catch(e){document.getElementById('memberList').innerHTML='<div class="empty">'+esc(e.message)+'</div>'}}
+function renderMembers(){const q=normalize(document.getElementById('memberSearch').value);const rows=members.filter(r=>normalize(r.join(' ')).includes(q));document.getElementById('memberList').innerHTML=rows.map(r=>`<article class="member-card"><div class="member-head"><img src="${esc(r[7]||'./icon-192.png')}" onerror="this.src='./icon-192.png'"><div><div class="member-name">${esc(r[0])}</div><div class="member-meta">${esc(r[6]||'-')} · NPA ${esc(r[1]||'-')}</div></div></div><div class="kv"><div><span>WHATSAPP</span><b>${esc(r[4]||'-')}</b></div><div><span>PEKERJAAN</span><b>${esc(r[5]||'-')}</b></div><div><span>PENDIDIKAN</span><b>${esc(r[3]||'-')}</b></div><div><span>ALAMAT</span><b>${esc(r[2]||'-')}</b></div></div></article>`).join('')||'<div class="empty">Data anggota tidak ditemukan.</div>'}
+async function loadProfile(){const r=await api('profile',{sessionToken:session.sessionToken});session.username=r.username;session.nama=r.nama;session.role=r.role;session.email=r.email;session.jabatan=r.jabatan;session.status=r.status;localStorage.setItem('pj_session',JSON.stringify(session));document.getElementById('pUsername').value=r.username||'';document.getElementById('pRole').value=r.role||'';document.getElementById('pStatus').value=r.status||'';document.getElementById('pNpa').value=r.npa||'';document.getElementById('pNama').value=r.nama||'';document.getElementById('pEmail').value=r.email||'';document.getElementById('pJabatan').value=r.jabatan||'';document.getElementById('pAlamat').value=r.alamat||'';document.getElementById('pPendidikan').value=r.pendidikan||'';document.getElementById('pWhatsapp').value=r.whatsapp||'';document.getElementById('pPekerjaan').value=r.pekerjaan||'';document.getElementById('profilePhoto').src=r.foto||'./icon-192.png';document.getElementById('topAvatar').src=r.foto||'./icon-192.png'}
+async function saveProfile(){setLoading(true);try{const r=await api('updateProfile',{sessionToken:session.sessionToken,data:{nama:v('pNama'),email:v('pEmail'),jabatan:v('pJabatan'),alamat:v('pAlamat'),pendidikan:v('pPendidikan'),whatsapp:v('pWhatsapp'),pekerjaan:v('pPekerjaan')}});await loadProfile();document.getElementById('profileMessage').textContent='Profile berhasil disimpan.'}catch(e){document.getElementById('profileMessage').textContent=e.message}finally{setLoading(false)}}
+function v(id){return document.getElementById(id).value}
+function pickProfilePhoto(){document.getElementById('profilePhotoInput').click()}
+async function uploadProfilePhoto(){const f=document.getElementById('profilePhotoInput').files[0];if(!f)return;setLoading(true);try{const photo=await compressImage(f);const r=await api('updatePhoto',{sessionToken:session.sessionToken,photo});document.getElementById('profilePhoto').src=r.foto;document.getElementById('topAvatar').src=r.foto}catch(e){alert(e.message)}finally{setLoading(false)}}
+function compressImage(file){return new Promise((resolve,reject)=>{const im=new Image();const rd=new FileReader();rd.onload=()=>{im.onload=()=>{const max=1000,scale=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*scale);c.height=Math.round(im.height*scale);c.getContext('2d').drawImage(im,0,0,c.width,c.height);resolve({base64:c.toDataURL('image/jpeg',.78).split(',')[1],mimeType:'image/jpeg',fileName:'profil_'+Date.now()+'.jpg'})};im.src=rd.result};rd.onerror=reject;rd.readAsDataURL(file)})}
+function openPasswordModal(){document.getElementById('modalRoot').innerHTML=`<div class="modal" onclick="if(event.target===this)closeModal()"><div class="sheet"><h3>Ganti Password</h3><div class="field"><label>PASSWORD LAMA</label><input id="oldPw" type="password"></div><div class="field"><label>PASSWORD BARU</label><input id="newPw" type="password"></div><div class="sheet-actions"><button class="small-btn" onclick="closeModal()">Batal</button><button class="small-btn primary2" onclick="changePw()">Simpan</button></div></div></div>`}
+async function changePw(){try{await api('changePassword',{username:session.username,oldPassword:v('oldPw'),newPassword:v('newPw'),sessionToken:session.sessionToken});closeModal();alert('Password berhasil diubah.')}catch(e){alert(e.message)}}
+function openMemberModal(){document.getElementById('modalRoot').innerHTML=`<div class="modal" onclick="if(event.target===this)closeModal()"><div class="sheet"><h3>Tambah Akun Anggota</h3><div class="field"><label>USERNAME</label><input id="mUser"></div><div class="field"><label>PASSWORD AWAL</label><input id="mPass" type="password"></div><div class="field"><label>NAMA</label><input id="mNama"></div><div class="field"><label>ROLE</label><select id="mRole"><option>Anggota</option><option>PIC</option><option>Admin</option></select></div><div class="field"><label>STATUS</label><select id="mStatus"><option>Aktif</option><option>Nonaktif</option></select></div><div class="field"><label>EMAIL</label><input id="mEmail"></div><div class="field"><label>JABATAN</label><input id="mJabatan"></div><div class="field"><label>NPA</label><input id="mNpa"></div><div class="field"><label>ALAMAT</label><textarea id="mAlamat"></textarea></div><div class="field"><label>PENDIDIKAN</label><input id="mPendidikan"></div><div class="field"><label>WHATSAPP</label><input id="mWhatsapp"></div><div class="field"><label>PEKERJAAN</label><input id="mPekerjaan"></div><div class="sheet-actions"><button class="small-btn" onclick="closeModal()">Batal</button><button class="small-btn primary2" onclick="createMember()">Simpan</button></div></div></div>`}
+async function createMember(){setLoading(true);try{await api('saveAnggota',{sessionToken:session.sessionToken,data:{username:v('mUser'),password:v('mPass'),nama:v('mNama'),role:v('mRole'),status:v('mStatus'),email:v('mEmail'),jabatan:v('mJabatan'),npa:v('mNpa'),alamat:v('mAlamat'),pendidikan:v('mPendidikan'),whatsapp:v('mWhatsapp'),pekerjaan:v('mPekerjaan')}});closeModal();await loadMembers();alert('Akun berhasil dibuat.')}catch(e){alert(e.message)}finally{setLoading(false)}}
+function closeModal(){document.getElementById('modalRoot').innerHTML=''}
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.activeElement===document.getElementById('loginPassword'))doLogin()});
+if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
+boot();
 </script>
 </body>
 </html>
