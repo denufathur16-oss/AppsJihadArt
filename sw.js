@@ -1,9 +1,8 @@
-const CACHE_NAME = 'program-jihad-pwa-v2';
+const CACHE_NAME = 'program-jihad-pwa-v3';
 
 const APP_SHELL = [
   './',
   './index.html',
-  './config.json',
   './manifest.webmanifest',
   './icon-192.png',
   './icon-512.png'
@@ -30,31 +29,23 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  const req = event.request;
+  if (event.request.method !== 'GET') return;
 
-  if (req.method !== 'GET') return;
-
-  const url = new URL(req.url);
+  const url = new URL(event.request.url);
 
   if (url.origin !== self.location.origin) return;
 
   event.respondWith(
-    caches.match(req)
-      .then(cached => {
-        if (cached) return cached;
+    fetch(event.request)
+      .then(response => {
+        const copy = response.clone();
 
-        return fetch(req)
-          .then(res => {
-            if (res.ok) {
-              const copy = res.clone();
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, copy);
+        });
 
-              caches.open(CACHE_NAME)
-                .then(cache => cache.put(req, copy));
-            }
-
-            return res;
-          })
-          .catch(() => caches.match('./index.html'));
+        return response;
       })
+      .catch(() => caches.match(event.request))
   );
 });
