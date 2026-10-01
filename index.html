@@ -18,6 +18,607 @@
 #appView{min-height:100vh;padding-bottom:84px}.topbar{position:sticky;top:0;z-index:20;background:rgba(246,244,237,.94);backdrop-filter:blur(16px);padding:calc(10px + env(safe-area-inset-top)) 16px 10px;border-bottom:1px solid rgba(229,235,231,.8);display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px;font-weight:900}.brand img{width:40px;height:40px;border-radius:12px;object-fit:contain}.avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#dce8e2}.content{padding:18px 15px;max-width:700px;margin:auto}.greeting{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;border-radius:24px;padding:22px;box-shadow:var(--shadow);margin-bottom:15px}.greeting small{opacity:.75}.greeting h2{margin:5px 0 0;font-size:22px}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}.stat{background:#fff;border-radius:20px;padding:17px;box-shadow:var(--shadow)}.stat b{display:block;font-size:28px}.stat span{font-size:11px;color:var(--muted);font-weight:800}.section-title{display:flex;align-items:center;justify-content:space-between;margin:18px 2px 10px;font-size:15px;font-weight:900}.select{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 10px;font-size:12px}.program-card,.member-card,.report-card,.profile-card,.timeline-card{background:#fff;border-radius:20px;padding:17px;margin-bottom:11px;box-shadow:var(--shadow);border:1px solid rgba(229,235,231,.7)}.program-title{font-weight:900;font-size:16px;line-height:1.35}.meta{font-size:11px;color:var(--muted);margin-top:7px}.status{display:inline-flex;margin-top:12px;border-radius:999px;padding:6px 9px;font-size:10px;font-weight:900;background:#eef5f1}.status.done{background:#dff3e8;color:#167047}.status.pending{background:#fff1d8;color:#96651c}.card-actions{display:flex;gap:8px;margin-top:12px}.small-btn{border:0;border-radius:12px;padding:10px 12px;font-size:11px;font-weight:900;background:#edf4f1;color:var(--green)}.small-btn.primary2{background:var(--green);color:#fff}.small-btn.danger{background:#fff0f0;color:var(--danger)}.empty{text-align:center;color:var(--muted);padding:30px 10px;font-size:13px}.member-head{display:flex;gap:12px;align-items:center}.member-head img{width:52px;height:52px;border-radius:16px;object-fit:cover;background:#dce8e2}.member-name{font-weight:900}.member-meta{font-size:11px;color:var(--muted);margin-top:3px}.kv{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.kv div{background:#f7faf8;border-radius:12px;padding:10px}.kv span{display:block;font-size:9px;color:var(--muted);font-weight:800}.kv b{font-size:12px}.bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:8px 7px calc(8px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(5,1fr)}.navbtn{border:0;background:none;color:#8a9b94;font-size:9px;font-weight:900;padding:5px 2px}.navbtn span{display:block;font-size:20px;margin-bottom:2px}.navbtn.active{color:var(--green)}.page{display:none}.page.active{display:block}.toolbar{display:flex;gap:8px;align-items:center}.toolbar .select{flex:1}.modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.42);display:flex;align-items:flex-end}.sheet{background:#fff;width:100%;max-height:92vh;overflow:auto;border-radius:26px 26px 0 0;padding:20px 16px calc(25px + env(safe-area-inset-bottom))}.sheet h3{margin:0 0 15px}.sheet-actions{display:flex;gap:9px;margin-top:12px}.sheet-actions button{flex:1}.photo-box{text-align:center;margin-bottom:18px}.photo-preview{width:105px;height:105px;border-radius:50%;object-fit:cover;background:#dce8e2}.readonly{background:#eef2f0!important;color:#718079}.loading{position:fixed;inset:0;z-index:200;background:rgba(246,244,237,.72);display:grid;place-items:center}.spinner{width:38px;height:38px;border:4px solid #d9e5df;border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
 @media(min-width:760px){.content{padding:25px}.bottomnav{left:50%;right:auto;width:700px;transform:translateX(-50%);border-radius:18px 18px 0 0}.stats{grid-template-columns:repeat(4,1fr)}}
 </style>
+
+/* LEGACY TIMELINE + REPORT DESIGN (kept from original app) */
+<style>
+:root{--green-dark:#063b2d;--green-light:#ecfdf5;--green-soft:#d1fae5;--yellow:#facc15;--orange:#f97316;--shadow-sm:0 6px 18px rgba(6,59,45,.07);--shadow-lg:0 20px 50px rgba(6,59,45,.16)}
+.timeline-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 15px;
+      padding: 13px;
+      background: white;
+      border: 1px solid rgba(6,78,59,.07);
+      border-radius: 15px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .timeline-range {
+      min-width: 0;
+      text-align: center;
+    }
+
+    .timeline-range-label {
+      color: var(--green-dark);
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    .timeline-range-sub {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .timeline-nav-btn {
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding: 9px 12px;
+      border: 1px solid #bbf7d0;
+      border-radius: 10px;
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-size: 10px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .timeline-nav-btn:hover {
+      background: var(--green-soft);
+      transform: translateY(-1px);
+    }
+
+    .timeline-today-btn {
+      background: var(--green-dark);
+      border-color: var(--green-dark);
+      color: white;
+    }
+
+    .timeline-today-btn:hover {
+      background: var(--green);
+    }
+
+    .timeline-list {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 14px;
+      width: 100%;
+    }
+
+    .timeline-scroll {
+      overflow: visible;
+      padding: 2px 2px 8px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .timeline-day {
+      min-width: 0;
+      min-height: 118px;
+      display: flex;
+      flex-direction: column;
+      background: white;
+      border: 1px solid rgba(6,78,59,.08);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: .2s ease;
+    }
+
+    .timeline-day:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .timeline-day.is-today {
+      border: 2px solid var(--yellow);
+      box-shadow: 0 8px 25px rgba(250,204,21,.14);
+    }
+
+    .timeline-date-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 6px 8px;
+      background: #f8fafc;
+      color: #64748b;
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .timeline-day.is-today .timeline-date-box {
+      background: var(--green-dark);
+      color: white;
+    }
+
+    .timeline-weekday {
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+    }
+
+    .timeline-day-number {
+      position: absolute;
+      margin: 0;
+      font-size: 1px;
+      opacity: 0;
+    }
+
+    .timeline-month {
+      display: none;
+    }
+
+    .timeline-day-content {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 9px 9px 10px;
+      position: relative;
+    }
+
+    .timeline-day-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 5px;
+      margin: 0 0 7px;
+    }
+
+    .timeline-day-title {
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .timeline-count {
+      display: none;
+    }
+
+    .timeline-empty {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 8px;
+      border: 0;
+      background: transparent;
+      color: #cbd5e1;
+      font-size: 0;
+    }
+
+    .timeline-empty::before {
+      content: '•';
+      font-size: 17px;
+      line-height: 1;
+      color: #cbd5e1;
+    }
+
+    .timeline-programs {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .timeline-program {
+      width: 100%;
+      display: block;
+      padding: 7px 8px;
+      border: 1px solid #dcfce7;
+      border-radius: 8px;
+      background: var(--green-light);
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .timeline-program:hover {
+      transform: translateY(-1px);
+      border-color: #86efac;
+      background: var(--green-soft);
+    }
+
+    .timeline-program-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .timeline-program-dot {
+      flex: 0 0 auto;
+      width: 7px;
+      height: 7px;
+      margin-top: 3px;
+      border-radius: 50%;
+      background: var(--yellow);
+    }
+
+    .timeline-program-dot.selesai {
+      background: #16a34a;
+    }
+
+    .timeline-program-dot.terlambat {
+      background: var(--orange);
+    }
+
+    .timeline-program-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .timeline-program-name {
+      display: block;
+      color: var(--green-dark);
+      font-size: 8px;
+      line-height: 1.3;
+      font-weight: 900;
+      word-break: break-word;
+    }
+
+    .timeline-program-pic {
+      display: none;
+    }
+
+    .timeline-program-status {
+      display: none;
+    }
+
+    .timeline-loading {
+      padding: 50px 20px;
+      background: white;
+      border-radius: 15px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 11px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    @media (max-width: 900px) {
+      .timeline-list {
+        grid-template-columns: repeat(7, minmax(110px, 1fr));
+        min-width: 800px;
+      }
+
+      .timeline-scroll {
+        overflow-x: auto;
+        padding-right: 2px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .timeline-toolbar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .timeline-range {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        order: -1;
+      }
+
+      .timeline-nav-btn {
+        width: 100%;
+      }
+
+      .timeline-scroll {
+        margin-right: -12px;
+        padding-right: 12px;
+      }
+
+      .timeline-list {
+        grid-template-columns: repeat(7, 115px);
+        min-width: 805px;
+      }
+
+      .timeline-day {
+        min-height: 112px;
+      }
+    }
+
+    
+/* ===== TIMELINE VISUAL ENHANCEMENT ===== */
+.timeline-toolbar{
+  background:linear-gradient(135deg,#ffffff 0%,#f0fdf4 100%);
+  border:1px solid rgba(6,78,59,.10);
+  border-radius:22px;
+  box-shadow:0 12px 32px rgba(6,78,59,.09);
+  padding:12px;
+}
+.timeline-range-label{font-size:19px;letter-spacing:.2px}
+.timeline-range-sub{font-size:10px;font-weight:800}
+.timeline-nav-btn{
+  border-radius:13px;
+  box-shadow:0 4px 12px rgba(6,78,59,.07);
+  font-size:10px;
+}
+.timeline-list{gap:11px}
+.timeline-day{
+  min-height:150px;
+  border:1px solid #e2e8f0;
+  border-radius:17px;
+  background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+  box-shadow:0 6px 18px rgba(15,23,42,.065);
+}
+.timeline-day:hover{transform:translateY(-3px);box-shadow:0 12px 25px rgba(6,78,59,.11);border-color:#bbf7d0}
+.timeline-day.is-today{border:2px solid #facc15;box-shadow:0 10px 26px rgba(250,204,21,.20)}
+.timeline-date-box{
+  min-height:48px;
+  padding:7px 8px;
+  justify-content:flex-start;
+  background:linear-gradient(135deg,#ecfdf5,#f8fafc);
+  border-bottom:1px solid #e2e8f0;
+  position:relative;
+}
+.timeline-day.is-today .timeline-date-box{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff}
+.timeline-weekday{font-size:9px;letter-spacing:1px}
+.timeline-day-content{padding:10px 10px 11px}
+.timeline-day-header{align-items:center;justify-content:space-between;margin:0 0 9px}
+.timeline-day-title{
+  width:34px;height:34px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  background:#fff;color:var(--green-dark);
+  border:1px solid #dcfce7;
+  box-shadow:0 3px 9px rgba(6,78,59,.08);
+  font-size:14px;font-weight:950;line-height:1;
+}
+.timeline-day.is-today .timeline-day-title{background:#facc15;color:#14532d;border-color:#fde68a}
+.timeline-programs{display:flex;flex-direction:column;gap:6px}
+.timeline-program{
+  width:100%;text-align:left;padding:8px 8px;
+  border:1px solid #dcfce7;border-radius:8px;
+  background:#f0fdf4;cursor:pointer;
+  transition:.18s ease;
+}
+.timeline-program:hover{background:#dcfce7;transform:translateX(2px);box-shadow:0 4px 10px rgba(6,78,59,.08)}
+.timeline-program-head{display:flex;align-items:flex-start;gap:7px}
+.timeline-program-dot{width:8px;height:8px;min-width:8px;border-radius:50%;margin-top:3px;box-shadow:0 0 0 3px rgba(34,197,94,.10)}
+.timeline-program-name{font-size:9px;line-height:1.35;font-weight:900;color:var(--green-dark)}
+.timeline-empty{font-size:17px;color:#cbd5e1;opacity:.75;display:flex;align-items:center;justify-content:center;flex:1}
+@media(max-width:900px){
+  .timeline-toolbar{grid-template-columns:auto 1fr auto auto}
+  .timeline-list{gap:9px}
+}
+@media(max-width:650px){
+  .timeline-toolbar{grid-template-columns:1fr 1fr;}
+  .timeline-range{grid-column:1/-1;grid-row:1}
+  .timeline-nav-btn{min-height:40px}
+  .timeline-day{min-height:142px}
+}
+
+
+    /* ============================================================
+       REMINDER ANGGOTA
+    ============================================================ */
+    .reminder-btn {
+      width: 100%;
+      min-height: 45px;
+      margin-top: 8px;
+      border: 1px solid #fde68a;
+      border-radius: 10px;
+      background: #fffbeb;
+      color: #92400e;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .25px;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .reminder-btn:hover {
+      background: #fef3c7;
+      transform: translateY(-1px);
+    }
+
+    .reminder-btn:disabled {
+      opacity: .7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* =====================================================
+       REPORT
+    ===================================================== */
+    .report-page{padding-bottom:40px}
+    .report-header{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border-radius:18px;padding:22px;margin-bottom:16px;box-shadow:var(--shadow-lg)}
+    .report-header-title{font-size:20px;font-weight:900;margin:0 0 5px}
+    .report-header-sub{font-size:11px;opacity:.86;line-height:1.5}
+
+    .report-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;padding:5px;background:#fff;border:1px solid #e5e7eb;border-radius:13px;box-shadow:var(--shadow-sm)}
+    .report-tab{border:0;background:transparent;color:#64748b;padding:9px 13px;border-radius:9px;font-size:9px;font-weight:900;cursor:pointer;transition:.18s ease}
+    .report-tab:hover{background:#f8fafc;color:var(--green-dark)}
+    .report-tab.active{background:var(--green-dark);color:#fff;box-shadow:0 4px 12px rgba(6,78,59,.15)}
+    .report-tab-panel{display:none}
+    .report-tab-panel.active{display:block}
+    /* ===== KLASemen BIDANG ===== */
+    .report-pic-list{display:block;overflow-x:auto;padding:0 0 4px}
+    .report-pic-table{width:100%;min-width:650px;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid #dbe4df;border-radius:14px;background:#fff;box-shadow:0 8px 24px rgba(6,78,59,.07)}
+    .report-pic-table th{padding:12px 11px;background:var(--green-dark);color:#fff;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.35px;text-align:center;border-bottom:3px solid var(--yellow);white-space:nowrap}
+    .report-pic-table th:first-child{text-align:center;width:48px}
+    .report-pic-table th:nth-child(2){text-align:left;min-width:190px}
+    .report-pic-table td{padding:12px 11px;background:#fff;border-bottom:1px solid #edf2ef;font-size:10px;font-weight:800;color:#374151;text-align:center;vertical-align:middle}
+    .report-pic-table tbody tr:last-child td{border-bottom:0}
+    .report-pic-table tbody tr:hover td{background:#f7fcf9}
+    .report-pic-rank{font-size:12px;font-weight:900;color:#64748b}
+    .report-pic-rank.top{width:28px;height:28px;margin:auto;border-radius:8px;display:flex;align-items:center;justify-content:center;background:#fef9c3;color:#854d0e}
+    .report-pic-name-cell{text-align:left!important;color:var(--green-dark)!important;font-size:11px!important;font-weight:900!important}
+    .report-pic-number{font-size:12px;font-weight:900;color:#1f2937}
+    .report-pic-done{color:#15803d}
+    .report-pic-undone{color:#dc2626}
+    .report-pic-percent-cell{min-width:115px}
+    .report-pic-percent-badge{display:inline-flex;align-items:center;justify-content:center;min-width:62px;padding:6px 9px;border-radius:999px;background:#f0fdf4;border:1px solid #bbf7d0;color:var(--green-dark);font-size:10px;font-weight:900}
+    .report-pic-mini-progress{height:5px;margin-top:6px;background:#e5e7eb;border-radius:99px;overflow:hidden}
+    .report-pic-mini-progress-fill{height:100%;background:linear-gradient(90deg,var(--green),#22c55e);border-radius:99px}
+    .report-pic-caption{margin:9px 2px 0;color:#6b7280;font-size:8px;font-weight:700}
+    @media(max-width:650px){
+      .report-pic-list{overflow-x:hidden;width:100%}
+      .report-pic-table{width:100%;min-width:0;table-layout:fixed;border-radius:10px}
+      .report-pic-table th{padding:7px 3px;font-size:7px;letter-spacing:0;line-height:1.15;white-space:normal}
+      .report-pic-table td{padding:7px 3px;font-size:8px;line-height:1.2}
+      .report-pic-table th:first-child{width:28px}
+      .report-pic-table th:nth-child(2){min-width:0;width:28%;}
+      .report-pic-table th:nth-child(3){width:17%}
+      .report-pic-table th:nth-child(4){width:14%}
+      .report-pic-table th:nth-child(5){width:18%}
+      .report-pic-table th:nth-child(6){width:23%}
+      .report-pic-name-cell{font-size:8px!important;line-height:1.2;word-break:break-word}
+      .report-pic-rank{font-size:9px}
+      .report-pic-rank.top{width:22px;height:22px;border-radius:6px}
+      .report-pic-number{font-size:9px}
+      .report-pic-percent-cell{min-width:0}
+      .report-pic-percent-badge{min-width:0;padding:4px 5px;font-size:8px}
+      .report-pic-mini-progress{height:3px;margin-top:4px}
+      .report-pic-caption{font-size:7px;line-height:1.35}
+    }
+    @media(max-width:390px){
+      .report-pic-table th{font-size:6.5px;padding:6px 2px}
+      .report-pic-table td{padding:6px 2px;font-size:7.5px}
+      .report-pic-name-cell{font-size:7.5px!important}
+      .report-pic-rank.top{width:20px;height:20px}
+      .report-pic-percent-badge{padding:3px 4px;font-size:7.5px}
+    }
+    /* ===== KLASemen DI TAB KETERcapaian PROGRAM ===== */
+    .report-program-klasemen-list{width:100%;overflow:hidden}
+    .report-program-klasemen-table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;border:1px solid #dbe4df;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 8px 24px rgba(6,78,59,.07)}
+    .report-program-klasemen-table th{padding:12px 8px;background:var(--green-dark);color:#fff;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.25px;text-align:center;border-bottom:3px solid var(--yellow);line-height:1.2}
+    .report-program-klasemen-table th:nth-child(1){width:8%}
+    .report-program-klasemen-table th:nth-child(2){width:34%;text-align:left}
+    .report-program-klasemen-table th:nth-child(3){width:14%}
+    .report-program-klasemen-table th:nth-child(4){width:13%}
+    .report-program-klasemen-table th:nth-child(5){width:17%}
+    .report-program-klasemen-table th:nth-child(6){width:14%}
+    .report-program-klasemen-table td{padding:11px 7px;background:#fff;border-bottom:1px solid #edf2ef;font-size:10px;font-weight:800;color:#374151;text-align:center;vertical-align:middle}
+    .report-program-klasemen-table tbody tr:last-child td{border-bottom:0}
+    .report-program-klasemen-table tbody tr:hover td{background:#f7fcf9}
+    .program-rank{font-weight:900;color:#64748b}
+    .program-rank.top{width:28px;height:28px;margin:auto;border-radius:8px;display:flex;align-items:center;justify-content:center;background:#fef9c3;color:#854d0e}
+    .program-field-name{text-align:left!important;color:var(--green-dark)!important;font-size:11px!important;font-weight:900!important;word-break:break-word}
+    .program-number{font-size:12px;font-weight:900}
+    .program-done{color:#15803d}
+    .program-undone{color:#dc2626}
+    .program-percent{display:inline-flex;align-items:center;justify-content:center;min-width:58px;padding:6px 8px;border-radius:999px;background:#f0fdf4;border:1px solid #bbf7d0;color:var(--green-dark);font-size:10px;font-weight:900}
+    .program-progress{height:5px;margin-top:5px;background:#e5e7eb;border-radius:99px;overflow:hidden}
+    .program-progress-fill{height:100%;background:linear-gradient(90deg,var(--green),#22c55e);border-radius:99px}
+    .program-klasemen-caption{margin:9px 2px 0;color:#6b7280;font-size:8px;font-weight:700;line-height:1.4}
+    @media(max-width:650px){
+      .report-program-klasemen-table{border-radius:10px}
+      .report-program-klasemen-table th{padding:7px 3px;font-size:6.5px;letter-spacing:0;line-height:1.15;white-space:normal}
+      .report-program-klasemen-table td{padding:7px 3px;font-size:8px;line-height:1.2}
+      .report-program-klasemen-table th:nth-child(1){width:8%}
+      .report-program-klasemen-table th:nth-child(2){width:32%}
+      .report-program-klasemen-table th:nth-child(3){width:14%}
+      .report-program-klasemen-table th:nth-child(4){width:13%}
+      .report-program-klasemen-table th:nth-child(5){width:18%}
+      .report-program-klasemen-table th:nth-child(6){width:15%}
+      .program-rank{font-size:9px}
+      .program-rank.top{width:21px;height:21px;border-radius:6px}
+      .program-field-name{font-size:8px!important}
+      .program-number{font-size:9px}
+      .program-percent{min-width:0;padding:4px 5px;font-size:8px}
+      .program-progress{height:3px;margin-top:4px}
+      .program-klasemen-caption{font-size:7px}
+    }
+    @media(max-width:390px){
+      .report-program-klasemen-table th{font-size:6px;padding:6px 2px}
+      .report-program-klasemen-table td{font-size:7.5px;padding:6px 2px}
+      .program-field-name{font-size:7.5px!important}
+      .program-rank.top{width:19px;height:19px}
+      .program-percent{font-size:7.5px;padding:3px 4px}
+    }
+    .report-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+    .report-summary-card{background:#fff;border:1px solid #e5e7eb;border-radius:15px;padding:16px;text-align:center;box-shadow:var(--shadow)}
+    .report-summary-number{font-size:25px;font-weight:900;color:var(--green-dark);margin-bottom:4px}
+    .report-summary-label{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+    .report-chart-card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
+    .report-chart-title{font-size:11px;font-weight:900;color:var(--green-dark);margin-bottom:15px}
+    .report-chart{display:flex;align-items:flex-end;gap:12px;min-height:270px;padding:15px 8px 0;border-bottom:1px solid #d1d5db;overflow-x:auto}
+    .report-bar-group{min-width:58px;height:245px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:7px}
+    .report-bar-value{font-size:9px;font-weight:900;color:var(--green-dark)}
+    .report-bar-track{height:205px;width:34px;background:#f1f5f9;border-radius:9px 9px 3px 3px;display:flex;align-items:flex-end;overflow:hidden}
+    .report-bar-fill{width:100%;background:linear-gradient(180deg,var(--green),var(--green-dark));border-radius:9px 9px 0 0;min-height:2px;transition:height .5s ease}
+    .report-bar-label{font-size:9px;font-weight:900;color:#4b5563;text-align:center;white-space:nowrap}
+    .report-list{display:grid;gap:10px}
+    .report-month-card{border:1px solid #e5e7eb;border-radius:14px;padding:15px;background:#f8fafc}
+    .report-month-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:11px}
+    .report-month-name{font-size:13px;font-weight:900;color:var(--green-dark);text-transform:uppercase}
+    .report-month-percent{font-size:14px;font-weight:900;color:var(--green)}
+    .report-progress-track{height:9px;background:#e5e7eb;border-radius:99px;overflow:hidden;margin-bottom:11px}
+    .report-progress-fill{height:100%;background:var(--green);border-radius:99px}
+    .report-month-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .report-stat{background:#fff;border-radius:9px;padding:9px;text-align:center}
+    .report-stat-number{font-size:15px;font-weight:900;color:#374151}
+    .report-stat-label{font-size:7px;color:var(--muted);font-weight:800;text-transform:uppercase;margin-top:2px}
+    .report-empty{text-align:center;padding:45px 20px;color:var(--muted);background:#fff;border:1px solid #e5e7eb;border-radius:18px}
+    .report-loading{text-align:center;padding:45px;color:var(--muted);font-size:11px}
+    .report-program-list{display:grid;gap:7px}
+    .report-program-card{width:100%;border:1px solid #e5e7eb;border-radius:12px;padding:13px 14px;background:#fff;box-shadow:none;cursor:pointer;transition:.18s ease;text-align:left}
+    .report-program-card:hover{border-color:#bbf7d0;background:#fafffc;transform:translateY(-1px)}
+    .report-program-card:active{transform:scale(.995)}
+    .report-program-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .report-program-name{font-size:13px;font-weight:800;color:#1f2937;line-height:1.35}
+    .report-program-meta{display:flex;align-items:center;gap:8px;flex-shrink:0}
+    .report-program-count{font-size:10px;font-weight:800;color:#166534;background:#f0fdf4;border:1px solid #dcfce7;padding:5px 8px;border-radius:999px;white-space:nowrap}
+    .report-program-arrow{font-size:14px;color:#9ca3af;line-height:1}
+    .report-program-sub{font-size:10px;color:#6b7280;margin-top:5px}
+    .report-program-sub strong{color:#374151}
+    .report-program-detail-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:17px}
+    .report-program-detail-title{font-size:18px;font-weight:900;color:var(--green-dark);line-height:1.3}
+    .report-program-detail-sub{font-size:10px;color:var(--muted);margin-top:4px}
+    .report-program-detail-close{border:0;background:#f3f4f6;color:#374151;width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer;flex-shrink:0}
+    .report-history-list{display:grid;gap:9px}
+    .report-history-item{border:1px solid #e5e7eb;border-radius:11px;padding:8px 10px;background:#fafafa}
+    .report-history-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+    .report-history-date{font-size:12px;font-weight:900;color:#1f2937}
+    .report-history-status{font-size:9px;font-weight:900;padding:4px 7px;border-radius:999px;white-space:nowrap}
+    .report-history-status.done{color:#166534;background:#dcfce7}
+    .report-history-status.pending{color:#92400e;background:#fef3c7}
+    .report-history-info{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+    .report-history-label{font-size:8px;color:#9ca3af;text-transform:uppercase;font-weight:800}
+    .report-history-value{font-size:10px;color:#374151;font-weight:700;margin-top:2px;line-height:1.4}
+    .report-history-note{margin-top:8px;padding-top:8px;border-top:1px solid #e5e7eb;font-size:10px;color:#6b7280;line-height:1.45}
+    .report-history-empty{text-align:center;padding:30px 15px;color:var(--muted);font-size:11px}
+    @media(max-width:650px){.report-summary{grid-template-columns:1fr 1fr}.report-summary-card:last-child{grid-column:1/-1}.report-header{padding:18px}.report-chart{gap:9px}.report-bar-group{min-width:52px}.report-month-stats{grid-template-columns:repeat(3,1fr)}}
+
+  
+    
+</style>
+
+<style>
+.legacy-modal-bg{position:fixed;inset:0;z-index:500;background:rgba(2,44,34,.62);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);display:none;align-items:flex-end;justify-content:center;padding:12px;}
+.legacy-modal{width:100%;max-width:560px;max-height:92vh;overflow:auto;background:#fff;border-radius:22px 22px 0 0;padding:22px 20px calc(20px + env(safe-area-inset-bottom));box-shadow:0 -15px 50px rgba(0,0,0,.2)}
+.legacy-modal-handle{width:40px;height:4px;margin:-7px auto 18px;border-radius:10px;background:#d1d5db}
+.legacy-modal h2{margin:0 0 12px;color:var(--green-dark);font-size:19px;line-height:1.35}
+.detail-section{background:#f8fafc;border:1px solid #e5e7eb;border-radius:11px;padding:13px;margin-bottom:10px}
+.detail-label{color:var(--green-dark);font-size:9px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;margin-bottom:6px}
+.detail-value{color:#374151;font-size:12px;line-height:1.6;white-space:pre-wrap}
+.detail-status{font-size:12px;font-weight:900;color:#166534}
+.detail-note{background:#f0fdf4}
+.legacy-close{width:100%;border:0;border-radius:12px;padding:12px;background:#f3f4f6;color:#374151;font-size:11px;font-weight:900}
+.legacy-report-modal{width:100%;max-width:560px;max-height:92vh;overflow:auto;background:#fff;border-radius:22px 22px 0 0;padding:18px 16px calc(20px + env(safe-area-inset-bottom));box-shadow:0 -15px 50px rgba(0,0,0,.2)}
+.report-program-detail-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:17px}
+.report-program-detail-title{font-size:18px;font-weight:900;color:var(--green-dark);line-height:1.3}
+.report-program-detail-sub{font-size:10px;color:var(--muted);margin-top:4px}
+.report-program-detail-close{border:0;background:#f3f4f6;color:#374151;width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer;flex-shrink:0}
+.report-history-list{display:grid;gap:9px}
+.report-history-item{border:1px solid #e5e7eb;border-radius:11px;padding:8px 10px;background:#fafafa}
+.report-history-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.report-history-date{font-size:12px;font-weight:900;color:#1f2937}
+.report-history-status{font-size:9px;font-weight:900;padding:4px 7px;border-radius:999px;white-space:nowrap}
+.report-history-status.done{color:#166534;background:#dcfce7}.report-history-status.pending{color:#92400e;background:#fef3c7}
+.report-history-info{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.report-history-label{font-size:8px;color:#9ca3af;text-transform:uppercase;font-weight:800}.report-history-value{font-size:10px;color:#374151;font-weight:700;margin-top:2px;line-height:1.4}
+.report-history-note{margin-top:8px;padding-top:8px;border-top:1px solid #e5e7eb;font-size:10px;color:#6b7280;line-height:1.45}.report-history-empty{text-align:center;padding:30px 15px;color:var(--muted);font-size:11px}
+@media(max-width:650px){.legacy-modal-bg{padding:0}.legacy-modal,.legacy-report-modal{border-radius:22px 22px 0 0}.report-history-info{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
 <div id="loginView">
@@ -39,8 +640,78 @@
       <div class="section-title"><span>Program Bulan Ini</span><select id="monthSelect" class="select" onchange="loadPrograms()"></select></div>
       <div id="programList"></div>
     </section>
-    <section id="timelinePage" class="page"><div class="section-title"><span>Time Schedule</span><button class="small-btn" onclick="loadTimeline()">↻ Refresh</button></div><div id="timelineList"></div></section>
-    <section id="reportPage" class="page"><div class="section-title"><span>Report</span><button class="small-btn" onclick="loadReports()">↻ Refresh</button></div><div id="reportList"></div></section>
+    <section id="timelinePage" class="page">
+  <main class="content">
+    <div class="timeline-toolbar">
+      <button class="timeline-nav-btn" onclick="moveTimeline(-14)">← 14 HARI</button>
+      <div class="timeline-range">
+        <div id="timelineRangeLabel" class="timeline-range-label">TIMELINE 14 HARI</div>
+        <div id="timelineRangeSub" class="timeline-range-sub">Memuat jadwal program...</div>
+      </div>
+      <button class="timeline-nav-btn timeline-today-btn" onclick="moveTimeline(0)">HARI INI</button>
+      <button class="timeline-nav-btn" onclick="moveTimeline(14)">14 HARI →</button>
+    </div>
+    <div id="timelineLoading" class="timeline-loading">⏳ Memuat timeline program...</div>
+    <div id="timelineList" class="timeline-scroll" style="display:none"><div class="timeline-list"></div></div>
+  </main>
+</section>
+    <section id="reportPage" class="page">
+      <main class="content report-page">
+        <div class="report-header">
+          <div class="report-header-title">📈 REPORT KETERCAPAIAN PROGRAM</div>
+          <div class="report-header-sub">Rekap perkembangan pelaksanaan program dari seluruh bulan.</div>
+        </div>
+
+        <div class="report-tabs" role="tablist" aria-label="Submenu Report">
+          <button type="button" class="report-tab active" data-report-tab="grafik" onclick="switchReportTab('grafik')">📊 Grafik</button>
+          <button type="button" class="report-tab" data-report-tab="program" onclick="switchReportTab('program')">🎯 Ketercapaian Program</button>
+          <button type="button" class="report-tab" data-report-tab="pic" onclick="switchReportTab('pic')">👤 Ketercapaian Bidang</button>
+        </div>
+
+        <div id="reportLoading" class="report-loading">⏳ Memuat report...</div>
+        <div id="reportContent" style="display:none">
+
+          <section id="reportTabGrafik" class="report-tab-panel active">
+            <div class="report-summary">
+              <div class="report-summary-card"><div id="reportTotal" class="report-summary-number">0</div><div class="report-summary-label">Total Program</div></div>
+              <div class="report-summary-card"><div id="reportDone" class="report-summary-number">0</div><div class="report-summary-label">Program Selesai</div></div>
+              <div class="report-summary-card"><div id="reportPercent" class="report-summary-number">0%</div><div class="report-summary-label">Ketercapaian</div></div>
+            </div>
+
+            <div class="report-chart-card">
+              <div class="report-chart-title">📊 Ketercapaian Per Bulan</div>
+              <div id="reportChart" class="report-chart"></div>
+            </div>
+
+            <div class="report-chart-card">
+              <div class="report-chart-title">📋 Detail Ketercapaian</div>
+              <div id="reportList" class="report-list"></div>
+            </div>
+          </section>
+
+          <section id="reportTabProgram" class="report-tab-panel">
+            <div class="report-chart-card">
+              <div class="report-chart-title">🏆 Klasemen Ketercapaian Program</div>
+              <div style="font-size:10px;color:var(--muted);margin:-7px 0 12px;">
+                Setiap baris adalah <b>program</b>. Jumlah menunjukkan berapa kali program dijalankan, lalu dibagi menjadi tercapai, belum tercapai, dan persentase sebagai point.
+              </div>
+              <div id="reportProgramKlasemenList" class="report-program-klasemen-list"></div>
+            </div>
+          </section>
+
+          <section id="reportTabPic" class="report-tab-panel">
+            <div class="report-chart-card">
+              <div class="report-chart-title">🏆 Klasemen Ketercapaian Bidang</div>
+              <div style="font-size:10px;color:var(--muted);margin:-7px 0 12px;">
+                Rekap program setiap bidang dalam format klasemen: jumlah program, tercapai, belum tercapai, dan persentase.
+              </div>
+              <div id="reportPICList" class="report-pic-list"></div>
+            </div>
+          </section>
+
+        </div>
+      </main>
+    </section>
     <section id="anggotaPage" class="page"><div class="section-title"><span>Data Anggota</span><button id="addMemberBtn" class="small-btn primary2 hidden" onclick="openMemberModal()">＋ Tambah</button></div><div class="field"><input id="memberSearch" placeholder="Cari nama, jabatan, WhatsApp..." oninput="renderMembers()"></div><div id="memberList"></div></section>
     <section id="profilePage" class="page"><div class="profile-card"><div class="photo-box"><img id="profilePhoto" class="photo-preview" src="./icon-192.png"><div style="margin-top:10px"><button class="small-btn primary2" onclick="pickProfilePhoto()">📷 Ganti Foto</button><input id="profilePhotoInput" type="file" accept="image/*" class="hidden" onchange="uploadProfilePhoto()"></div></div>
       <div class="field"><label>USERNAME</label><input id="pUsername" class="readonly" readonly></div>
@@ -63,11 +734,38 @@
   <nav class="bottomnav"><button class="navbtn active" data-page="homePage" onclick="showPage('homePage',this)"><span>⌂</span>Beranda</button><button class="navbtn" data-page="timelinePage" onclick="showPage('timelinePage',this)"><span>◷</span>Timeline</button><button class="navbtn" data-page="reportPage" onclick="showPage('reportPage',this)"><span>▥</span>Report</button><button class="navbtn" data-page="anggotaPage" onclick="showPage('anggotaPage',this)"><span>♙</span>Anggota</button><button class="navbtn" data-page="profilePage" onclick="showPage('profilePage',this)"><span>●</span>Profile</button></nav>
 </div>
 
-<div id="modalRoot"></div><div id="loading" class="loading hidden"><div class="spinner"></div></div>
+<div id="modalRoot"></div>
+<div id="detailBg" class="legacy-modal-bg" onclick="if(event.target===this)closeDetail()">
+  <div class="legacy-modal" onclick="event.stopPropagation()">
+    <div class="legacy-modal-handle"></div>
+    <h2 id="detailProgram">Detail Program</h2>
+    <div class="detail-section"><div class="detail-label">📅 Tanggal Program</div><div id="detailTanggal" class="detail-value">-</div></div>
+    <div class="detail-section"><div class="detail-label">👤 Penanggung Jawab</div><div id="detailPic" class="detail-value">-</div></div>
+    <div class="detail-section"><div class="detail-label">📊 Status</div><div id="detailStatus" class="detail-status">🟢 SELESAI</div></div>
+    <div class="detail-section detail-note"><div class="detail-label">📝 Catatan Pelaksanaan</div><div id="detailCatatan" class="detail-value">Tidak ada catatan.</div></div>
+    <div class="detail-section"><div class="detail-label">✅ Tanggal Selesai</div><div id="detailTanggalSelesai" class="detail-value">-</div></div>
+    <button class="legacy-close" onclick="closeDetail()">TUTUP</button>
+  </div>
+</div>
+<div id="reportProgramDetailBg" class="legacy-modal-bg" onclick="if(event.target===this)closeReportProgramDetail()">
+  <div class="legacy-report-modal" onclick="event.stopPropagation()">
+    <div class="legacy-modal-handle"></div>
+    <div class="report-program-detail-header">
+      <div><div id="reportProgramDetailTitle" class="report-program-detail-title">Program Kerja</div><div id="reportProgramDetailSub" class="report-program-detail-sub">Riwayat pelaksanaan</div></div>
+      <button class="report-program-detail-close" onclick="closeReportProgramDetail()">×</button>
+    </div>
+    <div id="reportProgramDetailLoading" class="report-history-empty">⏳ Memuat riwayat...</div>
+    <div id="reportProgramDetailList" class="report-history-list" style="display:none"></div>
+    <button class="legacy-close" onclick="closeReportProgramDetail()">TUTUP</button>
+  </div>
+</div>
+<div id="loading" class="loading hidden"><div class="spinner"></div></div>
 <script>
 const API_URL='https://script.google.com/macros/s/AKfycbwnP9XnbT7LAE8kGKmKz5RwITBFm-owAcS-0PxGnYayPW2iciMRXYMbDEjmzAYb7mKo9A/exec';
 let session=JSON.parse(localStorage.getItem('pj_session')||'null');
 let members=[]; let requestSeq=0; const pending={};
+let timelineStartDate=null; let timelinePrograms=[];
+let reportData=[]; let reportProgramKerjaData=[]; let reportPICData=[];
 
 function api(action,payload={}){return new Promise((resolve,reject)=>{const id='r'+Date.now()+'_'+(++requestSeq);pending[id]={resolve,reject};const iframe=document.createElement('iframe');iframe.name='api_'+id;iframe.style.display='none';iframe.dataset.req=id;document.body.appendChild(iframe);const form=document.createElement('form');form.method='POST';form.action=API_URL;form.target=iframe.name;form.style.display='none';const add=(n,v)=>{const i=document.createElement('input');i.type='hidden';i.name=n;i.value=v;form.appendChild(i)};add('action',action);add('requestId',id);add('payload',JSON.stringify(payload));document.body.appendChild(form);form.submit();form.remove();setTimeout(()=>{iframe.remove();if(pending[id]){delete pending[id];reject(new Error('Waktu tunggu API habis.'))}},30000)})}
 window.addEventListener('message',e=>{if(!e.data||e.data.type!=='PROGRAM_JIHAD_API')return;const m=e.data.payload||{};const p=pending[m.requestId];if(!p)return;delete pending[m.requestId];const iframe=document.querySelector('iframe[data-req="'+m.requestId+'"]');if(iframe)iframe.remove();m.success?p.resolve(m.data):p.reject(new Error(m.error||'Terjadi kesalahan.'))});
@@ -76,6 +774,7 @@ function esc(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&l
 function normalize(v){return String(v||'').toLowerCase().trim()}
 async function doLogin(){const u=document.getElementById('loginUsername').value.trim(),p=document.getElementById('loginPassword').value;document.getElementById('loginError').textContent='';if(!u||!p){document.getElementById('loginError').textContent='Username dan password wajib diisi.';return}setLoading(true);try{const r=await api('login',{username:u,password:p});if(!r.success)throw new Error(r.message||'Login gagal.');session=r;localStorage.setItem('pj_session',JSON.stringify(session));await unlock()}catch(e){document.getElementById('loginError').textContent=e.message;setLoading(false)}}
 async function unlock(){document.getElementById('loginView').classList.add('hidden');document.getElementById('appView').classList.remove('hidden');document.getElementById('greetingName').textContent=session.nama||session.username;document.getElementById('greetingRole').textContent=(session.role||'').toUpperCase()+(session.jabatan?' · '+session.jabatan:'');if(normalize(session.role)==='admin')document.getElementById('addMemberBtn').classList.remove('hidden');try{await loadProfile();await loadMonths();await loadPrograms();await loadReports();await loadMembers()}catch(e){if(/sesi|login/i.test(e.message))return forceLogout();alert(e.message)}finally{setLoading(false)}}
+timelineStartDate=startOfDay(new Date());
 async function boot(){if(!session){setLoading(false);return}setLoading(true);try{await api('profile',{sessionToken:session.sessionToken});await unlock()}catch(e){forceLogout()}finally{setLoading(false)}}
 function forceLogout(){session=null;localStorage.removeItem('pj_session');document.getElementById('appView').classList.add('hidden');document.getElementById('loginView').classList.remove('hidden')}
 async function doLogout(){try{await api('logout',{sessionToken:session.sessionToken})}catch(e){}forceLogout()}
@@ -84,9 +783,534 @@ async function loadMonths(){const r=await api('bulan',{sessionToken:session.sess
 async function loadPrograms(){const month=document.getElementById('monthSelect').value;const list=document.getElementById('programList');list.innerHTML='<div class="empty">Memuat...</div>';try{const data=await api('program',{bulan:month,username:session.username,sessionToken:session.sessionToken});const done=data.filter(x=>normalize(x.status)==='selesai').length;document.getElementById('statTotal').textContent=data.length;document.getElementById('statDone').textContent=done;document.getElementById('statPending').textContent=data.length-done;document.getElementById('statRate').textContent=(data.length?Math.round(done/data.length*100):0)+'%';list.innerHTML=data.length?data.map(programCard).join(''):'<div class="empty">Belum ada program.</div>'}catch(e){list.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}}
 function programCard(x){const done=normalize(x.status)==='selesai';const can=normalize(session.role)==='admin'||(normalize(session.role)==='pic'&&normalize(session.jabatan)===normalize(x.jabatan));return `<article class="program-card"><div class="program-title">${esc(x.program)}</div><div class="meta">${esc(x.tanggal||'-')} · ${esc(x.jabatan||'-')}</div><span class="status ${done?'done':'pending'}">${done?'✓ Selesai':'● Belum selesai'}</span>${x.catatan?`<div class="meta">Catatan: ${esc(x.catatan)}</div>`:''}${can&&!done?`<div class="card-actions"><button class="small-btn primary2" onclick="finishProgram(${x.row},'${esc(x.program)}','${esc(x.jabatan)}')">Tandai Selesai</button></div>`:''}</article>`}
 async function finishProgram(row,program,jabatan){const note=prompt('Catatan penyelesaian untuk '+program+':','');if(note===null)return;setLoading(true);try{await api('updateProgram',{bulan:document.getElementById('monthSelect').value,rowNumber:row,username:session.username,role:session.role,catatan:note,sessionToken:session.sessionToken});await loadPrograms()}catch(e){alert(e.message)}finally{setLoading(false)}}
-async function loadTimeline(){const list=document.getElementById('timelineList');list.innerHTML='<div class="empty">Memuat...</div>';const d=new Date();const start=new Date(d);start.setDate(d.getDate()-30);const end=new Date(d);end.setDate(d.getDate()+90);try{const data=await api('timeline',{startDate:iso(start),endDate:iso(end),username:session.username,sessionToken:session.sessionToken});list.innerHTML=data.length?data.map(x=>`<article class="timeline-card"><div class="program-title">${esc(x.program)}</div><div class="meta">${esc(x.tanggal||'-')} · ${esc(x.jabatan||'-')}</div><span class="status ${normalize(x.status)==='selesai'?'done':'pending'}">${esc(x.status)}</span></article>`).join(''):'<div class="empty">Tidak ada jadwal pada rentang ini.</div>'}catch(e){list.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}}
-function iso(d){return d.toISOString().slice(0,10)}
-async function loadReports(){const el=document.getElementById('reportList');el.innerHTML='<div class="empty">Memuat...</div>';try{const [a,b,c]=await Promise.all([api('reportPrograms',{sessionToken:session.sessionToken}),api('reportProgramKerja',{sessionToken:session.sessionToken}),api('reportPIC',{sessionToken:session.sessionToken})]);el.innerHTML='<div class="section-title">Rekap Bulanan</div>'+a.map(x=>`<article class="report-card"><b>${esc(x.bulan)}</b><div class="kv"><div><span>TOTAL</span><b>${x.total}</b></div><div><span>SELESAI</span><b>${x.selesai}</b></div><div><span>BELUM</span><b>${x.belum}</b></div><div><span>PROGRES</span><b>${x.persentase}%</b></div></div></article>`).join('')+'<div class="section-title">Program Kerja</div>'+b.slice(0,12).map(x=>`<article class="report-card"><b>${esc(x.program)}</b><div class="meta">${x.total} kegiatan · ${x.persentaseSelesai}% selesai</div></article>`).join('')+'<div class="section-title">Jabatan</div>'+c.map(x=>`<article class="report-card"><b>${esc(x.jabatan)}</b><div class="meta">${x.total} program · ${x.persentase}% selesai</div></article>`).join('')}catch(e){el.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}}
+
+function getStatusClass(status){const n=normalize(status);if(n==='selesai')return 'selesai';if(n==='terlambat')return 'terlambat';return 'belum';}
+function getStatusIcon(status){const n=normalize(status);if(n==='selesai')return '🟢';if(n==='terlambat')return '🔴';return '🟡';}
+function startOfDay(date) {
+
+      const d = new Date(date);
+
+      d.setHours(0, 0, 0, 0);
+
+      return d;
+
+    }
+
+
+    function formatDateKey(date) {
+
+      const d = startOfDay(date);
+
+      const year =
+        d.getFullYear();
+
+      const month =
+        String(d.getMonth() + 1)
+          .padStart(2, '0');
+
+      const day =
+        String(d.getDate())
+          .padStart(2, '0');
+
+      return year + '-' + month + '-' + day;
+
+    }
+
+
+    function parseProgramDate(value) {
+
+      if (!value) {
+        return null;
+      }
+
+      // Jika backend mengirim Date object.
+      if (Object.prototype.toString.call(value) === '[object Date]') {
+        if (isNaN(value.getTime())) return null;
+        return startOfDay(value);
+      }
+
+      let text = String(value).trim();
+      if (!text) return null;
+
+      // Hilangkan nama hari di depan, misalnya:
+      // "Kamis, 13 Agustus 2026" -> "13 Agustus 2026"
+      text = text.replace(/^(minggu|senin|selasa|rabu|kamis|jumat|sabtu)\s*,?\s+/i, '');
+
+      // YYYY-MM-DD / YYYY/MM/DD
+      let match = text.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})/);
+      if (match) {
+        const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+        return isNaN(date.getTime()) ? null : startOfDay(date);
+      }
+
+      // DD/MM/YYYY atau DD-MM-YYYY
+      match = text.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})/);
+      if (match) {
+        const date = new Date(Number(match[3]), Number(match[2]) - 1, Number(match[1]));
+        return isNaN(date.getTime()) ? null : startOfDay(date);
+      }
+
+      // Format Indonesia dari Google Sheets, misalnya:
+      // "13 Agustus 2026" / "13 Agu 2026"
+      const bulanIndonesia = {
+        januari: 0, jan: 0,
+        februari: 1, feb: 1,
+        maret: 2, mar: 2,
+        april: 3, apr: 3,
+        mei: 4,
+        juni: 5, jun: 5,
+        juli: 6, jul: 6,
+        agustus: 7, agu: 7,
+        september: 8, sep: 8,
+        oktober: 9, okt: 9,
+        november: 10, nov: 10,
+        desember: 11, des: 11
+      };
+
+      match = text.toLowerCase().match(/^(\d{1,2})\s+([a-zA-Z]+)\s+(\d{4})/);
+      if (match && Object.prototype.hasOwnProperty.call(bulanIndonesia, match[2])) {
+        const date = new Date(
+          Number(match[3]),
+          bulanIndonesia[match[2]],
+          Number(match[1])
+        );
+        return isNaN(date.getTime()) ? null : startOfDay(date);
+      }
+
+      // Format Inggris / ISO / format tanggal lain yang dikenali browser.
+      const date = new Date(text);
+      return isNaN(date.getTime()) ? null : startOfDay(date);
+    }
+
+
+    function formatTimelineDate(date) {
+
+      return new Intl.DateTimeFormat(
+        'id-ID',
+        {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        }
+      ).format(date);
+
+    }
+
+
+    function formatTimelineRange(start, end) {
+
+      const sameYear =
+        start.getFullYear() === end.getFullYear();
+
+      const startText =
+        new Intl.DateTimeFormat(
+          'id-ID',
+          {
+            day: 'numeric',
+            month: 'short',
+            year: sameYear ? undefined : 'numeric'
+          }
+        ).format(start);
+
+      const endText =
+        new Intl.DateTimeFormat(
+          'id-ID',
+          {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+          }
+        ).format(end);
+
+      return startText + ' — ' + endText;
+
+    }
+
+
+    function getTimelineMonths(start, end) {
+
+      const months = [];
+
+      const cursor =
+        new Date(
+          start.getFullYear(),
+          start.getMonth(),
+          1
+        );
+
+      const last =
+        new Date(
+          end.getFullYear(),
+          end.getMonth(),
+          1
+        );
+
+      while (cursor <= last) {
+
+        months.push(
+          cursor.getFullYear() +
+          '-' +
+          String(cursor.getMonth() + 1)
+            .padStart(2, '0')
+        );
+
+        cursor.setMonth(
+          cursor.getMonth() + 1
+        );
+
+      }
+
+      return months;
+
+    }
+
+
+    function loadTimeline() {
+
+      if (!timelineStartDate) {
+
+        timelineStartDate =
+          startOfDay(new Date());
+
+      }
+
+      const start =
+        startOfDay(timelineStartDate);
+
+      const end =
+        new Date(start);
+
+      end.setDate(
+        end.getDate() + 13
+      );
+
+      document.getElementById(
+        'timelineRangeLabel'
+      ).textContent =
+        formatTimelineRange(
+          start,
+          end
+        );
+
+      document.getElementById(
+        'timelineRangeSub'
+      ).textContent =
+        'Menampilkan program 14 hari • Klik program untuk melihat detail';
+
+      document.getElementById(
+        'timelineLoading'
+      ).style.display = 'block';
+
+      document.getElementById(
+        'timelineList'
+      ).style.display = 'none';
+
+
+      /*
+       * PENTING:
+       * Timeline mengambil data LANGSUNG dari fungsi backend
+       * getTimelinePrograms() di Code.gs.
+       *
+       * Fungsi tersebut membaca SEMUA SHEET BULAN,
+       * mengambil data program dari Sheet,
+       * lalu memfilter berdasarkan rentang tanggal 14 hari.
+       */
+      api('timeline', {
+        startDate: iso(start),
+        endDate: iso(end),
+        username: session.username,
+        sessionToken: session.sessionToken
+      })
+        .then(function (data) {
+
+          const programs =
+            Array.isArray(data)
+              ? data
+              : [];
+
+          const unique = {};
+
+          programs.forEach(function (item) {
+
+            if (!item) {
+              return;
+            }
+
+            const date =
+              item.tanggalKey
+                ? parseProgramDate(item.tanggalKey)
+                : parseProgramDate(item.tanggal);
+
+            if (!date) {
+              return;
+            }
+
+            /*
+             * Hindari data ganda jika ada data
+             * yang sama di lebih dari satu sumber.
+             */
+            const key =
+              String(item.sheetName || '') +
+              '|' +
+              String(item.row || '') +
+              '|' +
+              formatDateKey(date);
+
+            unique[key] =
+              item;
+
+          });
+
+
+          timelinePrograms =
+            Object.keys(unique)
+              .map(function (key) {
+                return unique[key];
+              })
+              .sort(function (a, b) {
+
+                const da =
+                  a.tanggalKey
+                    ? parseProgramDate(a.tanggalKey)
+                    : parseProgramDate(a.tanggal);
+
+                const db =
+                  b.tanggalKey
+                    ? parseProgramDate(b.tanggalKey)
+                    : parseProgramDate(b.tanggal);
+
+                return da - db;
+
+              });
+
+
+          renderTimeline();
+
+        })
+
+        .catch(function(error) {
+          console.error('Gagal mengambil timeline:', error);
+          timelinePrograms = [];
+          renderTimeline();
+          alert('❌ Gagal mengambil timeline: ' + (error && error.message ? error.message : error));
+        });
+
+    }
+
+
+    function renderTimeline() {
+
+      const list =
+        document.querySelector(
+          '#timelineList .timeline-list'
+        );
+
+      const loading =
+        document.getElementById(
+          'timelineLoading'
+        );
+
+      list.innerHTML = '';
+
+      const start =
+        startOfDay(timelineStartDate);
+
+      const today =
+        startOfDay(new Date());
+
+      const grouped = {};
+
+      timelinePrograms.forEach(function (item) {
+
+        const date =
+          item.tanggalKey
+            ? parseProgramDate(item.tanggalKey)
+            : parseProgramDate(item.tanggal);
+
+        if (!date) return;
+
+        const key = formatDateKey(date);
+
+        if (!grouped[key]) grouped[key] = [];
+
+        grouped[key].push(item);
+
+      });
+
+      for (let i = 0; i < 14; i++) {
+
+        const date = new Date(start);
+        date.setDate(date.getDate() + i);
+
+        const key = formatDateKey(date);
+        const programs = grouped[key] || [];
+        const isToday = key === formatDateKey(today);
+
+        const day = document.createElement('div');
+        day.className = 'timeline-day' + (isToday ? ' is-today' : '');
+
+        const weekday = new Intl.DateTimeFormat('id-ID', {
+          weekday: 'short'
+        }).format(date);
+
+        let programsHTML = '';
+
+        if (!programs.length) {
+          programsHTML = '<div class="timeline-empty">•</div>';
+        } else {
+          programsHTML =
+            '<div class="timeline-programs">' +
+            programs.map(function (item) {
+
+              const statusClass = getStatusClass(item.status);
+              const index = timelinePrograms.indexOf(item);
+
+              return `
+                <button
+                  class="timeline-program"
+                  onclick="showTimelineDetail(${index})"
+                  title="${esc(item.program || 'Program')}"
+                >
+                  <span class="timeline-program-head">
+                    <span class="timeline-program-dot ${statusClass}"></span>
+                    <span class="timeline-program-info">
+                      <span class="timeline-program-name">
+                        ${esc(item.program || 'Program')}
+                      </span>
+                    </span>
+                  </span>
+                </button>
+              `;
+
+            }).join('') +
+            '</div>';
+        }
+
+        day.innerHTML = `
+          <div class="timeline-date-box">
+            <div class="timeline-weekday">
+              ${esc(isToday ? 'HARI INI' : weekday)}
+            </div>
+          </div>
+
+          <div class="timeline-day-content">
+            <div class="timeline-day-header">
+              <div class="timeline-day-title">
+                ${date.getDate()}
+              </div>
+            </div>
+            ${programsHTML}
+          </div>
+        `;
+
+        list.appendChild(day);
+      }
+
+      loading.style.display = 'none';
+      document.getElementById('timelineList').style.display = 'block';
+    }
+
+
+    function showTimelineDetail(index) {
+
+      const item =
+        timelinePrograms[index];
+
+      if (!item) {
+        return;
+      }
+
+      showProgramDetail(item);
+
+    }
+
+
+    function showProgramDetail(item) {
+
+      if (!item) {
+        return;
+      }
+
+      document.getElementById(
+        'detailProgram'
+      ).textContent =
+        item.program || '-';
+
+      document.getElementById(
+        'detailTanggal'
+      ).textContent =
+        item.tanggal || '-';
+
+      document.getElementById(
+        'detailPic'
+      ).textContent =
+        item.pic || '-';
+
+      document.getElementById(
+        'detailStatus'
+      ).textContent =
+        getStatusIcon(item.status) +
+        ' ' +
+        (item.status || '-');
+
+      document.getElementById(
+        'detailCatatan'
+      ).textContent =
+        item.catatan
+          ? item.catatan
+          : 'Tidak ada catatan.';
+
+      document.getElementById(
+        'detailTanggalSelesai'
+      ).textContent =
+        item.tanggalSelesai
+          ? item.tanggalSelesai
+          : '-';
+
+      document.getElementById(
+        'detailBg'
+      ).style.display =
+        'flex';
+
+    }
+
+
+    function moveTimeline(days) {
+
+      if (days === 0) {
+
+        timelineStartDate =
+          startOfDay(new Date());
+
+      } else {
+
+        if (!timelineStartDate) {
+
+          timelineStartDate =
+            startOfDay(new Date());
+
+        }
+
+        timelineStartDate =
+          new Date(
+            timelineStartDate
+          );
+
+        timelineStartDate.setDate(
+          timelineStartDate.getDate() + days
+        );
+
+        timelineStartDate =
+          startOfDay(timelineStartDate);
+
+      }
+
+      loadTimeline();
+
+    }
+
+
+    
 async function loadMembers(){try{const r=await api('anggota',{sessionToken:session.sessionToken});members=r.rows||[];renderMembers()}catch(e){document.getElementById('memberList').innerHTML='<div class="empty">'+esc(e.message)+'</div>'}}
 function renderMembers(){const q=normalize(document.getElementById('memberSearch').value);const rows=members.filter(r=>normalize(r.join(' ')).includes(q));document.getElementById('memberList').innerHTML=rows.map(r=>`<article class="member-card"><div class="member-head"><img src="${esc(r[7]||'./icon-192.png')}" onerror="this.src='./icon-192.png'"><div><div class="member-name">${esc(r[0])}</div><div class="member-meta">${esc(r[6]||'-')} · NPA ${esc(r[1]||'-')}</div></div></div><div class="kv"><div><span>WHATSAPP</span><b>${esc(r[4]||'-')}</b></div><div><span>PEKERJAAN</span><b>${esc(r[5]||'-')}</b></div><div><span>PENDIDIKAN</span><b>${esc(r[3]||'-')}</b></div><div><span>ALAMAT</span><b>${esc(r[2]||'-')}</b></div></div></article>`).join('')||'<div class="empty">Data anggota tidak ditemukan.</div>'}
 async function loadProfile(){const r=await api('profile',{sessionToken:session.sessionToken});session.username=r.username;session.nama=r.nama;session.role=r.role;session.email=r.email;session.jabatan=r.jabatan;session.status=r.status;localStorage.setItem('pj_session',JSON.stringify(session));document.getElementById('pUsername').value=r.username||'';document.getElementById('pRole').value=r.role||'';document.getElementById('pStatus').value=r.status||'';document.getElementById('pNpa').value=r.npa||'';document.getElementById('pNama').value=r.nama||'';document.getElementById('pEmail').value=r.email||'';document.getElementById('pJabatan').value=r.jabatan||'';document.getElementById('pAlamat').value=r.alamat||'';document.getElementById('pPendidikan').value=r.pendidikan||'';document.getElementById('pWhatsapp').value=r.whatsapp||'';document.getElementById('pPekerjaan').value=r.pekerjaan||'';document.getElementById('profilePhoto').src=r.foto||'./icon-192.png';document.getElementById('topAvatar').src=r.foto||'./icon-192.png'}
@@ -103,6 +1327,441 @@ function closeModal(){document.getElementById('modalRoot').innerHTML=''}
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.activeElement===document.getElementById('loginPassword'))doLogin()});
 if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
 boot();
+
+async function loadReports() {
+      const loading = document.getElementById('reportLoading');
+      const content = document.getElementById('reportContent');
+      if (!loading || !content) return;
+      loading.style.display = 'block';
+      content.style.display = 'none';
+
+      api('reportPrograms',{sessionToken:session.sessionToken}).then(function(data){
+          reportData=Array.isArray(data)?data:[];
+          renderReport(reportData);
+          loading.style.display='none';
+          content.style.display='block';
+        }).catch(function(error){loading.textContent=error&&error.message?error.message:'Gagal memuat report.';});
+
+      api('reportProgramKerja',{sessionToken:session.sessionToken}).then(function(data){
+          reportProgramKerjaData=Array.isArray(data)?data:[];
+          renderReportProgramKlasemen(reportProgramKerjaData);
+          renderReportProgramKerja(reportProgramKerjaData);
+        }).catch(function(error){const list=document.getElementById('reportProgramKerjaList');if(list)list.innerHTML='<div class=\"report-empty\">Gagal memuat Report Program Kerja: '+esc(error&&error.message?error.message:'Terjadi kesalahan.')+'</div>';});
+
+      api('reportPIC',{sessionToken:session.sessionToken}).then(function(data){
+          reportPICData=Array.isArray(data)?data:[];
+          renderReportPIC(reportPICData);
+        }).catch(function(error){const list=document.getElementById('reportPICList');if(list)list.innerHTML='<div class=\"report-empty\">Gagal memuat ketercapaian bidang: '+esc(error&&error.message?error.message:'Terjadi kesalahan.')+'</div>';});
+    }
+
+    function switchReportTab(tab) {
+      const tabs = document.querySelectorAll('.report-tab[data-report-tab]');
+      const panels = {
+        grafik: document.getElementById('reportTabGrafik'),
+        program: document.getElementById('reportTabProgram'),
+        pic: document.getElementById('reportTabPic')
+      };
+
+      tabs.forEach(function(button) {
+        button.classList.toggle('active', button.getAttribute('data-report-tab') === tab);
+      });
+
+      Object.keys(panels).forEach(function(key) {
+        if (panels[key]) {
+          panels[key].classList.toggle('active', key === tab);
+        }
+      });
+    }
+
+    function renderReportProgramKlasemen(data) {
+      const list = document.getElementById('reportProgramKlasemenList');
+      if (!list) return;
+
+      list.innerHTML = '';
+
+      if (!data || !data.length) {
+        list.innerHTML = '<div class="report-empty">Belum ada data ketercapaian program.</div>';
+        return;
+      }
+
+      // DATA DI SINI ADALAH PER PROGRAM:
+      // total    = berapa kali program dijalankan
+      // selesai  = berapa kali program tercapai
+      // belum    = total - tercapai
+      // persentase = point ketercapaian program
+      const sortedData = data.slice().sort(function(a, b) {
+        const pctA = Number(a && a.persentaseSelesai) || 0;
+        const pctB = Number(b && b.persentaseSelesai) || 0;
+
+        if (pctB !== pctA) return pctB - pctA;
+
+        const doneA = Number(a && a.selesai) || 0;
+        const doneB = Number(b && b.selesai) || 0;
+
+        if (doneB !== doneA) return doneB - doneA;
+
+        const totalA = Number(a && a.total) || 0;
+        const totalB = Number(b && b.total) || 0;
+
+        if (totalB !== totalA) return totalB - totalA;
+
+        return String(a && a.program ? a.program : '')
+          .localeCompare(String(b && b.program ? b.program : ''), 'id');
+      });
+
+      const table = document.createElement('table');
+      table.className = 'report-program-klasemen-table';
+
+      table.innerHTML =
+        '<thead><tr>' +
+          '<th>Pos</th>' +
+          '<th>Nama Program</th>' +
+          '<th>Total Program</th>' +
+          '<th>Tercapai</th>' +
+          '<th>Belum Tercapai</th>' +
+          '<th>Persentase</th>' +
+        '</tr></thead><tbody></tbody>';
+
+      const tbody = table.querySelector('tbody');
+
+      sortedData.forEach(function(item, index) {
+        const total = Number(item && item.total) || 0;
+        const selesai = Number(item && item.selesai) || 0;
+        const belum = Math.max(0, total - selesai);
+
+        const rawPct = Number(item && item.persentaseSelesai);
+        const pct = Number.isFinite(rawPct)
+          ? Math.max(0, Math.min(100, rawPct))
+          : (total > 0 ? Math.round((selesai / total) * 100) : 0);
+
+        const tr = document.createElement('tr');
+        tr.style.cursor = 'pointer';
+
+        tr.onclick = function() {
+          openReportProgramDetail(item.program);
+        };
+
+        const rankClass = index === 0
+          ? 'program-rank top'
+          : 'program-rank';
+
+        tr.innerHTML =
+          '<td>' +
+            '<div class="' + rankClass + '">' + (index + 1) + '</div>' +
+          '</td>' +
+
+          '<td class="program-field-name">' +
+            esc(item && item.program ? item.program : '-') +
+          '</td>' +
+
+          '<td>' +
+            '<span class="program-number">' + total + '</span>' +
+          '</td>' +
+
+          '<td>' +
+            '<span class="program-number program-done">' + selesai + '</span>' +
+          '</td>' +
+
+          '<td>' +
+            '<span class="program-number program-undone">' + belum + '</span>' +
+          '</td>' +
+
+          '<td>' +
+            '<span class="program-percent">' + pct + '%</span>' +
+            '<div class="program-progress">' +
+              '<div class="program-progress-fill" style="width:' + pct + '%"></div>' +
+            '</div>' +
+          '</td>';
+
+        tbody.appendChild(tr);
+      });
+
+      list.appendChild(table);
+
+      const caption = document.createElement('div');
+      caption.className = 'program-klasemen-caption';
+      caption.textContent =
+        'Point = persentase ketercapaian. Total Program = jumlah berapa kali program tersebut dijalankan. Klik baris untuk melihat riwayat pelaksanaannya.';
+      list.appendChild(caption);
+    }
+
+    function renderReportPIC(data) {
+      const list = document.getElementById('reportPICList');
+      if (!list) return;
+
+      list.innerHTML = '';
+
+      if (!data || !data.length) {
+        list.innerHTML = '<div class="report-empty">Belum ada data bidang.</div>';
+        return;
+      }
+
+      const table = document.createElement('table');
+      table.className = 'report-pic-table';
+
+      table.innerHTML =
+        '<thead>' +
+          '<tr>' +
+            '<th>No</th>' +
+            '<th>Nama Bidang</th>' +
+            '<th>Jumlah Program</th>' +
+            '<th>Tercapai</th>' +
+            '<th>Belum Tercapai</th>' +
+            '<th>Persentase</th>' +
+          '</tr>' +
+        '</thead>' +
+        '<tbody></tbody>';
+
+      const tbody = table.querySelector('tbody');
+
+      // Urutkan bidang dari persentase ketercapaian tertinggi ke terendah.
+      // Jika persentasenya sama, urutkan berdasarkan nama bidang agar stabil.
+      const sortedData = data.slice().sort(function(a, b) {
+        const pctA = Number(a && a.persentase) || 0;
+        const pctB = Number(b && b.persentase) || 0;
+
+        if (pctB !== pctA) {
+          return pctB - pctA;
+        }
+
+        const nameA = String(a && a.pic ? a.pic : 'Tanpa Bidang').trim().toLowerCase();
+        const nameB = String(b && b.pic ? b.pic : 'Tanpa Bidang').trim().toLowerCase();
+        return nameA.localeCompare(nameB, 'id');
+      });
+
+      sortedData.forEach(function(item, index) {
+        const total = Number(item.total) || 0;
+        const selesai = Number(item.selesai) || 0;
+        const belum = Number(item.belum) || Math.max(0, total - selesai);
+        const pct = Math.max(0, Math.min(100, Number(item.persentase) || 0));
+
+        const row = document.createElement('tr');
+        row.innerHTML =
+          '<td>' +
+            '<div class="report-pic-rank ' + (index < 3 ? 'top' : '') + '">' +
+              (index + 1) +
+            '</div>' +
+          '</td>' +
+          '<td class="report-pic-name-cell">' +
+            esc(item.pic || 'Tanpa Bidang') +
+          '</td>' +
+          '<td><span class="report-pic-number">' + total + '</span></td>' +
+          '<td><span class="report-pic-number report-pic-done">' + selesai + '</span></td>' +
+          '<td><span class="report-pic-number report-pic-undone">' + belum + '</span></td>' +
+          '<td class="report-pic-percent-cell">' +
+            '<span class="report-pic-percent-badge">' + pct + '%</span>' +
+            '<div class="report-pic-mini-progress"><div class="report-pic-mini-progress-fill" style="width:' + pct + '%"></div></div>' +
+          '</td>';
+
+        tbody.appendChild(row);
+      });
+
+      list.appendChild(table);
+
+      const caption = document.createElement('div');
+      caption.className = 'report-pic-caption';
+      caption.textContent = 'Persentase = jumlah program tercapai dibandingkan jumlah seluruh program pada bidang.';
+      list.appendChild(caption);
+    }
+
+    function renderReport(data) {
+      let total = 0;
+      let selesai = 0;
+      data.forEach(function(item) {
+        total += Number(item.total) || 0;
+        selesai += Number(item.selesai) || 0;
+      });
+      const percent = total > 0 ? Math.round((selesai / total) * 100) : 0;
+
+      document.getElementById('reportTotal').textContent = total;
+      document.getElementById('reportDone').textContent = selesai;
+      document.getElementById('reportPercent').textContent = percent + '%';
+
+      const chart = document.getElementById('reportChart');
+      const list = document.getElementById('reportList');
+      chart.innerHTML = '';
+      list.innerHTML = '';
+
+      if (!data.length) {
+        chart.innerHTML = '<div class="report-empty" style="width:100%">Belum ada data program.</div>';
+        return;
+      }
+
+      data.forEach(function(item) {
+        const pct = Number(item.persentase) || 0;
+        const group = document.createElement('div');
+        group.className = 'report-bar-group';
+        group.innerHTML = '<div class="report-bar-value">' + pct + '%</div>' +
+          '<div class="report-bar-track"><div class="report-bar-fill" style="height:' + Math.max(pct, 1) + '%"></div></div>' +
+          '<div class="report-bar-label">' + esc(getReportMonthShort(item.bulan)) + '</div>';
+        chart.appendChild(group);
+
+        const card = document.createElement('div');
+        card.className = 'report-month-card';
+        card.innerHTML = '<div class="report-month-head"><div class="report-month-name">' + esc(item.bulan) + '</div><div class="report-month-percent">' + pct + '%</div></div>' +
+          '<div class="report-progress-track"><div class="report-progress-fill" style="width:' + pct + '%"></div></div>' +
+          '<div class="report-month-stats"><div class="report-stat"><div class="report-stat-number">' + item.total + '</div><div class="report-stat-label">Total</div></div>' +
+          '<div class="report-stat"><div class="report-stat-number">' + item.selesai + '</div><div class="report-stat-label">Selesai</div></div>' +
+          '<div class="report-stat"><div class="report-stat-number">' + item.belum + '</div><div class="report-stat-label">Belum</div></div></div>';
+        list.appendChild(card);
+      });
+    }
+
+    function getReportMonthShort(value) {
+      const text = String(value || '').trim();
+      const parts = text.split(/\s+/);
+      return parts.length > 1 ? parts[0].slice(0, 3) : text.slice(0, 6);
+    }
+
+
+    function renderReportProgramKerja(data) {
+
+      const list = document.getElementById('reportProgramKerjaList');
+
+      if (!list) return;
+
+      list.innerHTML = '';
+
+      if (!data || !data.length) {
+        list.innerHTML = '<div class="report-empty">Belum ada data program kerja.</div>';
+        return;
+      }
+
+      data.forEach(function(item) {
+
+        const total = Number(item.total) || 0;
+        const selesai = Number(item.selesai) || 0;
+        const ketercapaian = Number(item.persentaseSelesai) || 0;
+
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'report-program-card';
+        card.onclick = function() {
+          openReportProgramDetail(item.program);
+        };
+
+        card.innerHTML =
+          '<div class="report-program-head">' +
+            '<div class="report-program-name">' +
+              esc(item.program || '-') +
+            '</div>' +
+            '<div class="report-program-meta">' +
+              '<div class="report-program-count">' + total + '×</div>' +
+              '<div class="report-program-arrow">›</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="report-program-sub">' +
+            '<strong>' + selesai + '</strong> selesai · ' +
+            '<strong>' + (total - selesai) + '</strong> belum · ' +
+            '<strong>' + ketercapaian + '%</strong> ketercapaian' +
+          '</div>';
+
+        list.appendChild(card);
+
+      });
+
+    }
+
+
+    function openReportProgramDetail(program) {
+
+      const bg = document.getElementById('reportProgramDetailBg');
+      const loading = document.getElementById('reportProgramDetailLoading');
+      const list = document.getElementById('reportProgramDetailList');
+      const title = document.getElementById('reportProgramDetailTitle');
+      const sub = document.getElementById('reportProgramDetailSub');
+
+      if (!bg || !loading || !list || !title || !sub) return;
+
+      title.textContent = program || 'Program Kerja';
+      sub.textContent = 'Memuat riwayat pelaksanaan...';
+      loading.style.display = 'block';
+      list.style.display = 'none';
+      list.innerHTML = '';
+      bg.style.display = 'flex';
+
+      api('reportProgramDetail',{programName:program,sessionToken:session.sessionToken})
+        .then(function(data) {
+
+          const rows = Array.isArray(data) ? data : [];
+          loading.style.display = 'none';
+          list.style.display = 'grid';
+
+          const selesai = rows.filter(function(item) {
+            return String(item.status || '').trim().toLowerCase() === 'selesai';
+          }).length;
+
+          sub.textContent = rows.length + ' kali pelaksanaan · ' + selesai + ' selesai';
+
+          if (!rows.length) {
+            list.innerHTML = '<div class="report-history-empty">Belum ada riwayat pelaksanaan.</div>';
+            return;
+          }
+
+          rows.forEach(function(item) {
+
+            const isDone = String(item.status || '').trim().toLowerCase() === 'selesai';
+            const history = document.createElement('div');
+            history.className = 'report-history-item';
+
+            history.innerHTML =
+              '<div class="report-history-top">' +
+                '<div class="report-history-date">' +
+                  esc(item.tanggal || item.bulan || '-') +
+                '</div>' +
+                '<div class="report-history-status ' +
+                  (isDone ? 'done' : 'pending') + '">' +
+                  (isDone ? 'SELESAI' : 'BELUM SELESAI') +
+                '</div>' +
+              '</div>' +
+
+              '<div class="report-history-info">' +
+                '<div>' +
+                  '<div class="report-history-label">Bulan</div>' +
+                  '<div class="report-history-value">' + esc(item.bulan || '-') + '</div>' +
+                '</div>' +
+                '<div>' +
+                  '<div class="report-history-label">PIC</div>' +
+                  '<div class="report-history-value">' + esc(item.pic || '-') + '</div>' +
+                '</div>' +
+              '</div>' +
+
+              ((item.tanggalSelesai || item.catatan) ?
+                '<div class="report-history-note">' +
+                  (item.tanggalSelesai ? 'Selesai: ' + esc(item.tanggalSelesai) : '') +
+                  (item.tanggalSelesai && item.catatan ? '<br>' : '') +
+                  (item.catatan ? 'Catatan: ' + esc(item.catatan) : '') +
+                '</div>' : '');
+
+            list.appendChild(history);
+
+          });
+
+        })
+        .catch(function(error) {
+          loading.style.display = 'none';
+          list.style.display = 'grid';
+          sub.textContent = 'Riwayat tidak dapat dimuat';
+          list.innerHTML =
+            '<div class="report-history-empty">' +
+              esc(error && error.message ? error.message : 'Terjadi kesalahan.') +
+            '</div>';
+        })
+        ;
+    }
+
+
+    function closeReportProgramDetail() {
+
+      const bg = document.getElementById('reportProgramDetailBg');
+
+      if (bg) {
+        bg.style.display = 'none';
+      }
+
+    }
+
+
 </script>
 </body>
 </html>
