@@ -19,7 +19,6 @@
 @media(min-width:760px){.content{padding:25px}.bottomnav{left:50%;right:auto;width:700px;transform:translateX(-50%);border-radius:18px 18px 0 0}.stats{grid-template-columns:repeat(4,1fr)}}
 </style>
 
-/* LEGACY TIMELINE + REPORT DESIGN (kept from original app) */
 <style>
 :root{--green-dark:#063b2d;--green-light:#ecfdf5;--green-soft:#d1fae5;--yellow:#facc15;--orange:#f97316;--shadow-sm:0 6px 18px rgba(6,59,45,.07);--shadow-lg:0 20px 50px rgba(6,59,45,.16)}
 .timeline-toolbar {
@@ -772,6 +771,7 @@ window.addEventListener('message',e=>{if(!e.data||e.data.type!=='PROGRAM_JIHAD_A
 function setLoading(v){document.getElementById('loading').classList.toggle('hidden',!v)}
 function esc(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 function normalize(v){return String(v||'').toLowerCase().trim()}
+function iso(date){const d=startOfDay(date);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 async function doLogin(){const u=document.getElementById('loginUsername').value.trim(),p=document.getElementById('loginPassword').value;document.getElementById('loginError').textContent='';if(!u||!p){document.getElementById('loginError').textContent='Username dan password wajib diisi.';return}setLoading(true);try{const r=await api('login',{username:u,password:p});if(!r.success)throw new Error(r.message||'Login gagal.');session=r;localStorage.setItem('pj_session',JSON.stringify(session));await unlock()}catch(e){document.getElementById('loginError').textContent=e.message;setLoading(false)}}
 async function unlock(){document.getElementById('loginView').classList.add('hidden');document.getElementById('appView').classList.remove('hidden');document.getElementById('greetingName').textContent=session.nama||session.username;document.getElementById('greetingRole').textContent=(session.role||'').toUpperCase()+(session.jabatan?' · '+session.jabatan:'');if(normalize(session.role)==='admin')document.getElementById('addMemberBtn').classList.remove('hidden');try{await loadProfile();await loadMonths();await loadPrograms();await loadReports();await loadMembers()}catch(e){if(/sesi|login/i.test(e.message))return forceLogout();alert(e.message)}finally{setLoading(false)}}
 timelineStartDate=startOfDay(new Date());
